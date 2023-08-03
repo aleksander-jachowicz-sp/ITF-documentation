@@ -2,7 +2,7 @@
 ITF - documentation
 """
 
-__version__ = "4.8.1"
+__version__ = "4.8.3"
 
 
 class InvalidKindError(Exception):
