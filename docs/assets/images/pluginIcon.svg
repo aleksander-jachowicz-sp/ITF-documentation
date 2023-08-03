@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="422 349.1033 3.968 3.968"
+   width="40"
+   height="40"
+   preserveAspectRatio="none"
+   version="1.1"
+   id="svg85"
+   sodipodi:docname="AMIdentity Logo40x40.svg"
+   inkscape:version="1.1.1 (3bf5ae0d25, 2021-09-20)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview87"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="true"
+     inkscape:zoom="46.05"
+     inkscape:cx="20"
+     inkscape:cy="20"
+     inkscape:window-width="3840"
+     inkscape:window-height="2080"
+     inkscape:window-x="-11"
+     inkscape:window-y="-11"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg81">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1496" />
+  </sodipodi:namedview>
+  <defs
+     id="defs49" />
+  <style
+     id="style51">.a6izo4zJpcolor {fill:#270949;fill-opacity:1;}.aD6z1nYkhcolor {fill:#270949;fill-opacity:1;}.aLgOaV3zRcolors-0 {fill:#5F62AC;fill-opacity:1;}.icon3-str {stroke:#AAAAAA;stroke-opacity:1;}</style>
+  <g
+     opacity="1"
+     transform="translate(-28.829745,-30.411169)"
+     id="g58" />
+  <g
+     opacity="1"
+     transform="translate(-15.278341,-28.719414)"
+     id="g65">
+    <svg
+       width="380"
+       height="37.825199"
+       x="538"
+       y="362.1033"
+       version="1.1"
+       preserveAspectRatio="none"
+       viewBox="2.4219 -28.4078 289.3164 28.7985"
+       id="svg63" />
+  </g>
+  <g
+     opacity="1"
+     transform="translate(22.43402,-7.1556789)"
+     id="g83">
+    <svg
+       width="98.793297"
+       height="98.793297"
+       x="422"
+       y="349.1033"
+       version="1.1"
+       preserveAspectRatio="none"
+       viewBox="22.279976 22.279976 55.440048 55.440048"
+       id="svg81">
+      <g
+         class="aLgOaV3zRcolors-0"
+         id="g79"
+         transform="matrix(0.03774359,0,0,0.03774359,8.9289271,25.509732)">
+        <g
+           id="g77">
+          <rect
+             x="42.304577"
+             y="42.303478"
+             width="15.399637"
+             height="15.399637"
+             id="rect67" />
+          <path
+             d="M 39.994549,24.157206 C 29.643177,28.180815 22.279976,38.246326 22.279976,50 c 0,2.673336 0.387796,5.255947 1.096842,7.703133 h 16.617731 z"
+             id="path69" />
+          <path
+             d="m 50,22.279976 c -2.670025,0 -5.250095,0.387373 -7.69545,1.095785 V 39.993492 H 75.843781 C 71.822495,29.642614 61.762131,22.279976 50,22.279976 Z"
+             id="path71" />
+          <g
+             id="g1086">
+            <g
+               id="g1082">
+              <path
+                 d="m 50,77.720024 c 2.67376,0 5.256721,-0.387588 7.704189,-1.096275 V 60.013134 H 24.158405 C 28.182859,70.364998 38.247528,77.720024 50,77.720024 Z"
+                 id="path73" />
+            </g>
+          </g>
+          <path
+             d="M 76.624802,42.303494 H 60.014191 V 75.842583 C 70.365562,71.820526 77.720024,61.760933 77.720024,50 c 0,-2.670376 -0.387161,-5.25087 -1.095222,-7.696506 z"
+             id="path75" />
+        </g>
+      </g>
+    </svg>
+  </g>
+</svg>

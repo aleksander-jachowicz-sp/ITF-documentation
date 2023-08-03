@@ -1,0 +1,11 @@
+site_name: ITF Documentation
+site_url: https://example.com/
+nav:
+    - Home: index.md
+    - ITF Testing Concepts: 'ITF Testing concepts.md'
+    - Installation:
+        - Installation and configuration: 'ITF Installation and configuration.md'
+        - IIQ ITF Plugin installation: 'Deploy ITF IdentityIQ plugin.md'
+    - Command reference: 'ITF XML Reference.md'
+    - About: 'about.md'
+theme: readthedocs
