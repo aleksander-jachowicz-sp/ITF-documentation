@@ -1,6 +1,5 @@
-# Configuring ITF DTD for Eclipse
 
-<https://itestf.atlassian.net/wiki/spaces/ITF/pages/266371090/Configuring+ITF+DTD+for+Eclipse>
+# Configuring ITF DTD for Eclipse
 
 * * *
 
@@ -8,15 +7,15 @@ ITF test cases can be defined using XML. To provide ability to easily create tho
 
 You will find the dtd file (AutomatedTestingXMLSchemaXX.dtd) in the distribution zip under itf\\schema\\ directory. Place this file somewhere available to the IDE of your choice. The common place is \\itf\\schema directory (create if not exists) in you IIQ build.
 
-##### Eclipse configuration for TestCase dtd
+## Eclipse configuration for TestCase dtd
 
 Open preferences (Window->Preferences) and select XML -> XML Catalog setting.
 
-![](https://itestf.atlassian.net/wiki/download/attachments/266371090/Eclipse%20preferences%20dtd.png?version=1&modificationDate=1690355806416&cacheVersion=1&api=v2)
+![eclipse dtd 1.png](assets%2Fimages%2Feclipse%20dtd%201.png)
 
 Select Add… button on the right.
 
-![](https://itestf.atlassian.net/wiki/download/thumbnails/266371090/Eclipse%20edit%20XML%20catalog.png?version=1&modificationDate=1690355806423&cacheVersion=1&api=v2&width=612&height=324)
+![eclipse dtd 2.png](assets%2Fimages%2Feclipse%20dtd%202.png)
 
 Location field should point to where you placed the dtd file.
 
@@ -26,13 +25,13 @@ Key should be `"-//amidentity//DTD TestCase 2.0//EN"`
 
 Press OK and Apply and Close on the Preferences window. DTD configuration is now finished and will be referenced when you place following heading in you test case file:
 
-```java
+```xml
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE TestCase PUBLIC "-//amidentity//DTD TestCase 2.0//EN" 
 "http://www.amidentity.com/dtd/AutomatedTestingXMLSchema20.dtd">
 ```
 
-##### Eclipse configuration for resource object dtd
+## Eclipse configuration for resource object dtd
 
 Perform similar procedure to configure dtd for resource object xml files.
 
