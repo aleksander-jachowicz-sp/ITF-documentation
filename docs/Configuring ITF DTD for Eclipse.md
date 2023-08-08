@@ -39,7 +39,7 @@ Use Key: `"-//amidentity//DTD Mocked ResourceObject 2.0//EN"`
 
 Use following header for mocked resource objects xml files:
 
-```java
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE MockedAccount PUBLIC "-//amidentity//DTD Mocked ResourceObject 2.0//EN" 
 "http://www.amidentity.com/dtd/MockedRecourceObjectXMLSchema20.dtd">

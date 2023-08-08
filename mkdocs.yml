@@ -9,11 +9,10 @@ nav:
         - IIQ ITF Plugin installation: 'Deploy ITF IdentityIQ plugin.md'
         - Install IntelliJ ITF plugin: 'Install IntelliJ ITF plugin.md'
         - Configuring ITF in the SSB build: 'Configuring ITF in the SSB build.md'
-        - Configuring project libraries and dtd:
-            - Configuring ITF libraries for IntelliJ: 'Configuring ITF libraries for IntelliJ.md'
-            - Configuring ITF DTD for IntelliJ: 'Configuring ITF DTD for IntelliJ.md'
-            - Configuring ITF libraries for Eclipse: 'Configuring ITF libraries for Eclipse.md'
-            - Configuring ITF DTD for Eclipse: 'Configuring ITF DTD for Eclipse.md'
+        - Configuring ITF libraries for IntelliJ: 'Configuring ITF libraries for IntelliJ.md'
+        - Configuring ITF DTD for IntelliJ: 'Configuring ITF DTD for IntelliJ.md'
+        - Configuring ITF libraries for Eclipse: 'Configuring ITF libraries for Eclipse.md'
+        - Configuring ITF DTD for Eclipse: 'Configuring ITF DTD for Eclipse.md'
     - Reference:
         - Command reference: 'ITF XML Reference.md'
         - Pseudo date handling: 'Pseudo date handling.md'

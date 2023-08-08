@@ -2,6 +2,7 @@
 # Configuring ITF libraries for Eclipse
 
 * * *
+
 1. Open your IIQ project properties, select JAVA Build Path(1) and then select Source(2) tab. Using Add Folder button (3), add ITF folders `ift/resources` and `itf/test` (4). You should have copied them previously from the unzipped distribution file.
     ![eclipse libraries 1.PNG](assets%2Fimages%2Feclipse%20libraries%201.PNG)
 2. Select Libraries tab (1) and click Add JARs... button (2).

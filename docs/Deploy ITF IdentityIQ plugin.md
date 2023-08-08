@@ -1,4 +1,6 @@
+
 # IdentityIQ ITF plugin installation
+
 * * *
 
 1. First step is to deploy ITF plugin to your IdentityIQ instance (Most likely you will be starting with you local instance). Log in to your IdentityIQ and navigate to Plugins (Gear Icon → Plugins). You will need administrative capabilities to perform this action.

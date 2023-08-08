@@ -1,6 +1,5 @@
 
-ITF XML Reference
-=================
+# ITF XML Reference
 
 * * *
 
@@ -42,7 +41,7 @@ The content of ITF test case is represented by XML file.
 
 `<ObjectsToLoad>` - list of the objects to be loaded before test case processing. The order of loading is the same as order in the test case. test identity is loaded after all object from `<ObjectsToLoad>` are imported.
 
-`<TestCommands>` - place all you test commands in here ![(wink)](/wiki/s/-69361965/6452/ebb6a38bd07dacac904a492e44a0530ef4a35e36/_/images/icons/emoticons/wink.png)
+`<TestCommands>` - place all you test commands in here ;-)
 
 ## ITF Commands
 
@@ -68,7 +67,7 @@ Some aggregation attributes are set to the following defaults promoteAttributes:
 
 **Properties:**
 
-`attributes` (optional) - List of attributes the will be passed to Aggregator class during execution of this command (refer to IdentityIQ documentation on aggregation for these attribute details). By default these are set as follows:
+`attributes` (optional) - List of attributes the will be passed to Aggregator class during execution of this command (refer to IdentityIQ documentation on aggregation for these attribute details). By default, these are set as follows:
 
 * promoteAttributes: true,
 * correlateEntitlements: false,
@@ -78,7 +77,7 @@ You can overwrite them if needed.
 
 `accounts` - list of pairs (you can aggregate multiple accounts in one command). Each pair requires the name of the application and native identity of the account you want aggregated.
 
-The success of this command relies on the proper data being present in the target system. Therefore, unless you are testing the aggregation itself, it may be better to use [mockedAggregate <MockedAggregate>](/wiki/spaces/AR/pages/45088773) command.
+The success of this command relies on the proper data being present in the target system. Therefore, unless you are testing the aggregation itself, it may be better to use mockedAggregate command.
 
 ### CheckApprovals
 
@@ -417,13 +416,13 @@ It is important to have a clean environment before running the test so that the 
 
 `deleteAccessRequest` - Boolean. When set to true, the command will delete all IdentityRequest objects for identity specified by `identityName`.
 
-`workflowCase`\- Boolean. When set to true, the command will delete all workflow cases which have identityName variable set to `identityName`.
+`workflowCase` - Boolean. When set to true, the command will delete all workflow cases which have identityName variable set to `identityName`.
 
 `auditEvent` - Boolean. When set to true, the command will delete all audit events which target attribute equals to `identityName`.
 
 `provisioningRequest` - Boolean. When set to true, the command will delete all ProvisioningRequest objects with identity set to `identityName`.
 
-`identityItself`\- Boolean. When set to true, the command will terminate identity specified by `identityName` attribute. When this is used, all objects related to identity will also be deleted by IdentityIQ (except audit events).
+`identityItself` - Boolean. When set to true, the command will terminate identity specified by `identityName` attribute. When this is used, all objects related to identity will also be deleted by IdentityIQ (except audit events).
 
 Warning. When testing aggregation (for example) you may not specify `testIdentity` in the test case, but you may still want to clean up before the test. In such case, make sure you do specify `identityName` for clean command.
 
@@ -451,7 +450,7 @@ Command will only work with objects that have name attribute
 
 `isRegex` - when set to true, `NamePrefix` will be treated as regular expression to match object names for deletion. When set to false `NamePrefix` will be used as simple prefix to match object names to delete.
 
-Use wisely. Unproper usage and configuration may result in deletion of large amounts of data
+Use wisely. Wrong usage and configuration may result in deletion of large amounts of data
 
 ### LoadObjects
 
@@ -796,7 +795,7 @@ Objects for which attributes can be validated are:
 
 `<ExpectedIdentity>` - Represents identity data that will be validated.
 
-Attributes:
+**ExpectedIdentity Attributes:**
 
 `identityName` - name of the validated identity.
 
@@ -808,7 +807,7 @@ Attributes:
 
 `<ExpectedLink>` - contains link data to be validated against validated identity.
 
-Attributes:
+**ExpectedLink Attributes:**
 
 `applicationName` - Name of the application of the link being validated. Mandatory.
 
@@ -826,7 +825,7 @@ When `nativeIdentity` is not specified and there are other attributes present fo
 
 `RoleAssignment` - Single assignment that ITF will try to find in the identity. Format is a direct mapping from IdentityIQs `RoleAssignment` object. All attributes of `RoleAssignment` and nested content will be searched for in identity.
 
-Role assignments attributes:
+**RoleAssignment attributes:**
 
 `roleName` - Name of the role of the role assignment. Mandatory.
 
@@ -842,7 +841,7 @@ Role assignments attributes:
 
 `RoleTarget` - role target for the `RoleAssignment`. You can provide multiple `RoleTarget` s.
 
-Role target attributes:
+**RoleTarget attributes:**
 
 `applicationName` - name of the application that is expected to be used for the `RoleAssignment`.
 
@@ -850,7 +849,7 @@ Role target attributes:
 
 `AccountItem` - account item for the `RoleTarget`. Can provide multiple `AccountItem`s for single target. `AccountItem` sould be only used for targets belonging to role detections (same as in IdentityIQ).
 
-Account item attributes:
+**AccountItem attributes:**
 
 `name` - name of the entitlement (managed attribute) type.
 
@@ -860,7 +859,7 @@ Account item attributes:
 
 `RoleDetection` - Single detection that ITF will try to find in the identity. Format is a direct mapping from IdentityIQs `RoleDetection` object. All attributes of `RoleDetection` and nested content will be searched for in identity.
 
-Role detection attributes:
+**RoleDetection attributes:**
 
 `roleName` - Name of the role of the role detection. Mandatory.
 
@@ -948,7 +947,7 @@ Once found, the `workflowCase` is restarted synchronously, meaning the `wakeUpWo
 
 ### ValidateXpath
 
-This command let’s you validate any attribute present in XML object representation of any SaliPointObject.
+This command lets you validate any attribute present in XML object representation of any SaliPointObject.
 
 Command contains two elements: one specifies they way to find an objects for validation and second one the validations itself.
 
@@ -1012,7 +1011,7 @@ Only one of `<NameOrId>`, `<FilterString>`, `<HqlQuery>`can be used at the same 
 
 ### CheckApprovalExpirationResult
 
-Sometimes it is needed to test the bahavior of the approval which is a part of Identity Request. Checking exitance of such approvals and acting on them can be done with <CheckApprovals> command, but to validate what happens on the expiration requires this dedicated command.
+Sometimes it is needed to test the behavior of the approval which is a part of Identity Request. Checking exitance of such approvals and acting on them can be done with <CheckApprovals> command, but to validate what happens on the expiration requires this dedicated command.
 
 This command will search for the latest access request made by the test identity and will validate if it contains specified approvals in given status. Commands structure reflects how IdentityIQ stores it’s data.
 
@@ -1044,7 +1043,7 @@ This command will search for the latest access request made by the test identity
 
 `<ApprovalSet>` Single approval set for ApprovalSummary. There can be only one ApprovalSet per ApprovalSummary.
 
-`<RequestApprovalItem>` - Single approvalItem to be validated. The attribute are the same as the attribute of Sailpoint’s ApprovalItem.
+`<RequestApprovalItem>` - Single approvalItem to be validated. The attribute is the same as the attribute of Sailpoint’s ApprovalItem.
 
 `<IdentityName>` - Optional element. Command will search for last identity request for test identity (specified in the test case). If this element is present command will search for last identity request belonging to this identity instead.
 

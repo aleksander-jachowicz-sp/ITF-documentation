@@ -1,4 +1,6 @@
+
 # ITF Testing concepts
+
 * * *
 
 A basic ITF test case consists of 3 parts, as follows: a) loading test data, b) executing the actions (commands), and c) validating results. Obviously, more complex patterns are possible (load data, execute something, validate, load more data, execute, validate again), but in order to understand how ITF works, we will focus on the basic scenario.
@@ -14,9 +16,13 @@ Let’s start with the first situation.
 
 #### Main test identity
 
-Test identity xml should be saved in a xml file. It is a best practice to name the file the same as the test identity name. For example, if the test identity name is JohnDoe, the file will be called JohnDoe.xml. The name of our test identity, or rather the name of the file that contains the test identity xml, should be specified in `testIdentity` test case attribute (without xml extension).
+Test identity xml should be saved in a xml file. It is a best practice to name the file the same as the test identity name. 
+For example, if the test identity name is JohnDoe, the file will be called JohnDoe.xml. 
+The name of our test identity, or rather the name of the file that contains the test identity xml, 
+should be specified in `testIdentity` test case attribute (without xml extension).
 
-The second scenario is when you don’t want the identity to exist at the beginning of the test because the test is to aggregate the data and validate identity creation.
+The second scenario is when you don’t want the identity to exist at the beginning of the test because the test is 
+to aggregate the data and validate identity creation.
 
 #### Initial aggregation
 
