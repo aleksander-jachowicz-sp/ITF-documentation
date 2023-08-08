@@ -79,4 +79,12 @@ Bugfix: MockedAggregation now properly can handle Date and Long attribute types.
 1. Small bugfixes
 2. class case exception on getting test case result mitigation
 
+## 4.8.4
+
+1. Bugfix: Retry on hHttpClient 
+
+IntelliJ plugin version 1.9.2
+
+1. Java - ITF test case reference contributor.
+2. Find JUnit class with current test case.
 [Top](/wiki/spaces/ITF/pages/18022739/ITF+XML+Reference)
