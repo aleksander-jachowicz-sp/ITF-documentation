@@ -17,5 +17,9 @@ nav:
         - Command reference: 'ITF XML Reference.md'
         - Pseudo date handling: 'Pseudo date handling.md'
         - Test identity generator: 'Test identity generator.md'
+    - IntelliJ plugin:
+        - Plugin capabilities: 'IntelliJFunc.md'
     - Release notes: 'Release notes.md'
 theme: readthedocs
+extra_css:
+  - css/itf_doc.css

@@ -1,0 +1,31 @@
+.my_note {
+    padding: 8px 35px 8px 14px;
+    margin-bottom: 20px;
+
+    border-radius: 4px;
+    color: #235067;
+    background-color: #f1c40f;
+    border-color: #bce8f1;
+}
+
+.my_note:before { /*aditionally prepend `⚠ Note:` to message: */
+    content: "⚠ Warning:";
+    font-weight: bold;
+    display: block;
+}
+
+.my_info {
+    padding: 8px 35px 8px 14px;
+    margin-bottom: 20px;
+
+    border-radius: 4px;
+    color: #061c28;
+    background-color: #bcdaf1;
+    border-color: #bcdaf1;
+}
+
+.my_info:before { /*aditionally prepend `⚠ Note:` to message: */
+    content: "⚠ Note:";
+    font-weight: bold;
+    display: block;
+}
