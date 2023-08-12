@@ -1,6 +1,5 @@
-# Pseudo date handling
 
-<https://itestf.atlassian.net/wiki/spaces/ITF/pages/259784705/Pseudo+date+handling>
+# Pseudo date handling
 
 * * *
 

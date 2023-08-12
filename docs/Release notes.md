@@ -1,6 +1,5 @@
-# Release notes
 
-<https://itestf.atlassian.net/wiki/spaces/ITF/pages/246972440/Release+notes>
+# Release notes
 
 * * *
 
@@ -44,7 +43,7 @@ Intellij plugin bugfixes.
 
 ## 4.7
 
-[RunRule](https://itestf.atlassian.net/wiki/spaces/ITF/pages/18022739/ITF+XML+Reference#%3CRunRule%3E) and [RunScript](https://itestf.atlassian.net/wiki/spaces/ITF/pages/18022739/ITF+XML+Reference#%3CRunScript%3E) commands added.
+[RunRule] and [RunScript] commands added.
 
 Role assignment and role detections validation added to ValidateResult command.
 

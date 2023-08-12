@@ -69,17 +69,19 @@ The result will be the identity with all roles assigned.
 
 ## Execution of test actions
 
-When testing manually, once you configure the test identity, you start running the main testing activities. These could be requesting a role for the the identity, running aggregation, invoking life cycle event for the test identity. ITF is very similar, except you configure what you want to happen using [ITF commands](https://itestf.atlassian.net/wiki/pages/resumedraft.action?draftId=18022739) and framework will do the job for you. The huge benefit is not only that ITF will execute the actions for you, saving a lot of manual labor time, but once you defined these actions all the test cases are automatically repeatable.
+When testing manually, once you configure the test identity, you start running the main testing activities. 
+These could be requesting a role for the identity, running aggregation, invoking life cycle event for the test identity. 
+ITF is very similar, except you configure what you want to happen using ITF commands and framework will do the job for you. The huge benefit is not only that ITF will execute the actions for you, saving a lot of manual labor time, but once you defined these actions all the test cases are automatically repeatable.
 
-The actions that you can perform are represented by the commands provided by ITF. Please see [ITF commands reference](https://itestf.atlassian.net/wiki/pages/resumedraft.action?draftId=18022739) for details.
+The actions that you can perform are represented by the commands provided by ITF. Please see ITF commands reference for details.
 
 ## Validation results
 
-Once all the actions have been executed, the last element of usual test case is data validation. Technically, this phase is also done by using validation commands like [validateResult](/wiki/spaces/AR/pages/55377986) or [checkAudit](/wiki/spaces/AR/pages/124223535).
+Once all the actions have been executed, the last element of usual test case is data validation. Technically, this phase is also done by using validation commands like [validateResult] or [checkAudit].
 
 ## Cleanup
 
-Although not required, it is a good practice to clean (delete) all the test data used during the test case after all work is finished. To do that, you can use [clean command](/wiki/spaces/AR/pages/55312406) as a last command in your test case.
+Although not required, it is a good practice to clean (delete) all the test data used during the test case after all work is finished. To do that, you can use [clean command] as a last command in your test case.
 
 ## ITF Directories
 

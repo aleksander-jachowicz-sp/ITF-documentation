@@ -25,7 +25,7 @@ The content of ITF test case is represented by XML file.
 </TestCase>
 ```
 
-1st and 2nd line represent the header that should be present in each test case file. It contains reference to the DTD configuration in your IDE.
+the 1st and 2nd line represents the header that should be present in each test case file. It contains reference to the DTD configuration in your IDE.
 
 `<TestCase>` - this is the main test case node. All test case content is placed inside this node.
 
@@ -47,7 +47,7 @@ The content of ITF test case is represented by XML file.
 
 ### Aggregate
 
-Command to aggregate selected account(s) from target application. This command will perform actual aggregation from target system in the same way IdentityIQ does.
+Command to aggregate selected account(s) from target application. This command will perform actual aggregation from a target system in the same way IdentityIQ does.
 
 This will only work with applications that support getObject. For example, it will work with LDAP or AD, but will not work for file base applications. For such aggregations consider using [mockedAggregate <MockedAggregate>](/wiki/spaces/AR/pages/45088773) command.
 
@@ -280,7 +280,7 @@ Assign command allows assignment of links, entitlements, roles and workgroups. C
 ```
 **Tags:**
 
-`<IdentityName>` - Name of the identity to assign all the objects to. When [TestIdentity](https://itestf.atlassian.net/wiki/spaces/ITF/pages/14942210/ITF+Documentation#Main-test-identity) is present in the test case and you want to assign objects to that identity, you can omit `<IdentityName>`.
+`<IdentityName>` - Name of the identity to assign all the objects to. When [TestIdentity] is present in the test case and you want to assign objects to that identity, you can omit `<IdentityName>`.
 
 `<Link>` - Link to be assigned to the identity. Can be used multiple times in `<Assign>` command to create multiple accounts.
 
@@ -351,7 +351,7 @@ For this command to work, your build must include IIQTester-simulator-x.x.jar pr
 
 `to` (optional) - To whom the expected notification is sent.
 
-`compareMethod` - Possible values are contains(default) or equals. When set to “contains” command will check if any of the subject, to and body attributes are contained in the expected email sent by IdentityIQ. When set to “equals”, command will check strict equality of the values. For `EmailBody` this setting will only be evaluated when `isRegex` attribute is set to false.
+`compareMethod` - Possible values are contained(default) or equals. When a set to “contains” command will check if any of the subject, to and body attributes are contained in the expected email sent by IdentityIQ. When set to “equals”, command will check strict equality of the values. For `EmailBody` this setting will only be evaluated when `isRegex` attribute is set to false.
 
 `timeOutSec` - (optional, default value 10 sec) IdentityIQ is sending emails asynchronously. Due to that, they may not be sent immediately. <CheckEmail> command will keep checking for `timeOutSec` number of seconds before failing. Of course if it finds the matching email before the timeout, it will result insuccess.
 
@@ -430,7 +430,7 @@ Warning. When testing aggregation (for example) you may not specify `testIdentit
 
 `Clean` tags
 
-`IdentityName` - name of the identity you want to perform cleaning for. If test case has [TestIdentity](https://itestf.atlassian.net/wiki/spaces/ITF/pages/14942210/ITF+Documentation#Main-test-identity) specified and you want to perform cleaning for that identity you can omit `IdentityName` tag.
+`IdentityName` - name of the identity you want to perform cleaning for. If test case has [TestIdentity] specified and you want to perform cleaning for that identity you can omit `IdentityName` tag.
 
 ### CleanObject
 
@@ -538,7 +538,7 @@ Some aggregation attributes are set to the following defaults promoteAttributes:
 
 ### ProcessEvents
 
-A significant part of the processing in IdentityIQ is based on life cycle events. `processEvents` command is the way to help you test the correctness of your events configuration. It is basically similar to running Identity refresh task with `processTriggers` option checked with filter set for the [testIdentity](https://itestf.atlassian.net/wiki/spaces/ITF/pages/14942210/ITF+Documentation#Main-test-identity). After running refresh command will check if there is a task result present with the name starting with `triggerName` attribute + “:” + name of the test identity. If such task result is found, command execution is considered successful. It throws otherwise. Command will timeout waiting for the task result after 20 seconds.
+A significant part of the processing in IdentityIQ is based on life cycle events. `processEvents` command is the way to help you test the correctness of your events configuration. It is basically similar to running Identity refresh task with `processTriggers` option checked with filter set for the [testIdentity]. After running refresh command will check if there is a task result present with the name starting with `triggerName` attribute + “:” + name of the test identity. If such task result is found, command execution is considered successful. It throws otherwise. Command will timeout waiting for the task result after 20 seconds.
 
 Internally, command uses `Identitizer` with “processEvents” enabled. Command launches lifecycle’s configured workflow synchronously.
 
