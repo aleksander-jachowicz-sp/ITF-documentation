@@ -16,6 +16,7 @@ nav:
     - Reference:
         - Command reference: 'ITF XML Reference.md'
         - Pseudo date handling: 'Pseudo date handling.md'
+        - IIQ Connectivity: 'IIQ connectivity.md'
         - Test identity generator: 'Test identity generator.md'
     - IntelliJ plugin:
         - Plugin capabilities: 'IntelliJFunc.md'
