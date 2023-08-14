@@ -112,4 +112,44 @@ File must meet the following requirements to be recognized as IdentityIQ XML obj
 
 ## ITF helper functionalities
 
-Soon...
+### New ITF Test Case
+You can create a new ITF Test CAse by creating a new XML file and manually filling out the required content, 
+but with plugin you can do it with a single click.
+
+To create a new ITF Test Case, right-click on the directory where you want the file stored, 
+select New -> "ITF Test Case" 
+![new ITF test case.png](assets%2Fimages%2Fnew%20ITF%20test%20case.png)
+
+A window will pop up for you to fill out the test case name. The name of the file will reflect the name of the test case, 
+and you will get a blank ITF test case to work with.
+![new ITF test case file.png](assets%2Fimages%2Fnew%20ITF%20test%20case%20file.png)
+
+### Insert ITF Element
+
+This option lets you insert various ITF elements into an ITF test case. 
+It's available on the opo up menu when you right-click inside ITF test case file. 
+![Insert ITF element popup.png](assets%2Fimages%2FInsert%20ITF%20element%20popup.png)
+
+Depending on where you click, you will get different options.
+
+#### Insert Test Identity
+
+Anywhere you right-click inside the test case, you will get an option to insert a Test Identity.
+
+#### Insert Identity Validation
+
+#### Insert Approval
+
+#### Insert Account Request
+
+#### Insert Approval Summary Validation
+
+#### Insert Mocked Aggregation
+
+#### Insert Identity Refresh command
+
+### Generate Mocked Aggregation file
+
+### Save Test Case to IIQ
+
+More, soon to come...

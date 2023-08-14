@@ -66,3 +66,20 @@ will be stored in clear text in the file. More over the settings in `servers.pro
 you can use system properties. Please [contact us](mailto:contact@amidentity.com) for details.  
 
 ## Import and export IdentityIQ objects, retrieve commands
+
+All functionality of ITF IntelliJ plugin except running test cases uses below mechanism to obtain IIQ server credentials.
+Connectivity is based on target properties files used by SSB. Each environment has its own properties file. ITF reads those files 
+and searches for the following properties: `%%ECLIPSE_URL%%`, `%%ECLIPSE_USER%%`, `%%ECLIPSE_PASS%%`. 
+When found, values are saved under environment name in the settings.
+You can later select the desired environment in the menu from the list of available environments to perform various IIQ object manipulations.
+
+<div class="my_info">
+Environment values are read during startup of IntelliJ.
+If you change the values in the properties file, you will have to restart IntelliJ to see the changes.
+</div>
+
+In ITF Settings, you have the option to configure which environments are visible in the menus, 
+and you can also change the display name of each environment.
+
+These settings are available in Tools -> ITF Settings menu:
+![ITF Settings.png](assets%2Fimages%2FITF%20Settings.png)
