@@ -27,7 +27,7 @@ ITF IntelliJ plugin will search for IIQ server credentials in the following loca
     4. When found, ITF expects credentials to be in this file and will use them.
 2. Default itf.properties in directory `itf/resources/itf.properties` of the current [module](https://www.jetbrains.com/help/idea/creating-and-managing-modules.html). This is used when computer dedicated file is not found. 
 
-### Running from Junit runner
+### Running from IntelliJ Junit runner
 
 When running a test case using Junit inside IntelliJ, ITF will obtain IIQ credentials from the following locations (in order of priority):
 
