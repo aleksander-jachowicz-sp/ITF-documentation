@@ -127,7 +127,7 @@ and you will get a blank ITF test case to work with.
 ### Insert ITF Element
 
 This option lets you insert various ITF elements into an ITF test case. 
-It's available on the opo up menu when you right-click inside ITF test case file. 
+It's available on the po up menu when you right-click inside XML ITF test case file. 
 ![Insert ITF element popup.png](assets%2Fimages%2FInsert%20ITF%20element%20popup.png)
 
 Depending on where you click, you will get different options.
@@ -135,6 +135,12 @@ Depending on where you click, you will get different options.
 #### Insert Test Identity
 
 Anywhere you right-click inside the test case, you will get an option to insert a Test Identity.
+![insert test identity menu.png](assets%2Fimages%2Finsert%20test%20identity%20menu.png)
+
+Inserting identity lets you choose an identity from IIQ server and select what parts of it you want to include.
+You will always get all identity attributes, but in addition you can select to keep or remove: links, manager, 
+roles, role assignments, and finally you can decide to include simulation command with all the applications that chosen identity has.   
+![insert test identity selection.png](assets%2Fimages%2Finsert%20test%20identity%20selection.png)
 
 #### Insert Identity Validation
 
