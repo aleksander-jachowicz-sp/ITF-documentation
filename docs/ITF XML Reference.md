@@ -653,41 +653,53 @@ Run workflow command gives you the ability to run any workflow with a predefined
 
 ### SimulateProvisioning
 
-When testing internal IdentityIQ configurations, the actual external provisioning is not important if your applications configuration(connector) is already properly tested (you will still have to perform end-to-end testing, but that is a separate topic). In order to be able to focus on IdentityIQ side, in ITF, all external provisioning can be simulated. This mechanism allows you to mark any application to be in simulation mode during the execution of your test case. After the test case is over, the simulation must be turned off.
+When testing internal IdentityIQ configurations, the actual external provisioning is not important if your applications 
+configuration(connector) is already properly tested (you will still have to perform end-to-end testing, 
+but that is a separate topic). In order to be able to focus on IdentityIQ side, in ITF, all external provisioning can be simulated. 
+This mechanism allows you to mark any application to be in simulation mode during the execution of your test case. 
+After the test case is over, the simulation should be turned off.
 
 Simulation means that any provisioning performed by Provisioner will always return with selected status. The possible statuses are defined by IdentitiIQ and are limited to: `queued`, `committed` and `failed`. The default setting is `committed`, but you can configure it any way you need. For example, you may have a test case which checks how your workflow reacts to failed provisioning.
 
-Simulation is, technically, based on IntegrationConfig configuration so, if you already using it, you will have to overwrite your customization.
+Simulation is, technically, based on IntegrationConfig configuration, so if you already using it, 
+you will have to overwrite your customization.
 
-In this example application LDAP is configured to return committed result to any provisioning request.
-
-```xml
-<SimulateProvisioning>
-  <Application>LDAP</Application>
-</SimulateProvisioning>
-```
-
-Following example shows how to simulate failed provisioning from AD application
+All attributes syntax:
 
 ```xml
-<SimulateProvisioning simulateStatus="failed">
-  <Application>LDAP</Application>
+<SimulateProvisioning simulateStatus="committed|queued|failed|retry" 
+                      logDisplayName="Simulating failed provisioning"
+                      errorMessage="Account already exists"
+                      resultLocation="Account|Plan"
+                      turnOffSimulation="false|true"
+                      resourceObjectRuleName="Set guid">
+    <Application>OpenLDAP</Application>
 </SimulateProvisioning>
 ```
 
 **Properties:**
+ 
+* `applications` - List of applications to be set to simulation mode.
+* `simulateStatus` - provisioningResult to be returned from simulated application. 
+Available values are: `retry`, `queued`, `committed`, `failed`. 
+Default value is `commited`.  
+* `turnOffSimulation` - Boolean setting. When set to `true`, any configured simulation will be turned off and all other settings will be ignored.
+* `errorMessage` - Error message to be returned in `ProvisioningResult` from simulated application. 
+It only makes sens to use this setting when `simulateStatus` is set to `failed`. 
+* `resultLocation` - `ProvisioningResult` in IdentityIQ is set on `ProvisioningPlan` by the connector. 
+It can be set on Plan level or on `AccountRequest` level. 
+This setting allows you to specify where the result should be set. Possible values are: `Plan` and `Account`. Default value is `Plan`.
+* `resourceObjectRuleName` - Many IIQ connectors, after provisioning, invoke `getObject` method on created(modified) account.
+When data is received from the target system, connector builds `ResourceObject` and attaches it to `ProvisionginResult`. 
+On AD, for example, this allows attributes set by Active Directory during account creation to be available in IIQ right after provisioning. 
+This setting allows you to specify the name of the rule that will be used to build `ResourceObject` for simulated provisioning.
+This rule gets the `plan` and `resourceObject` attributes as input argument and should return `ResourceObject` object.
+Input `resourceObject` already contains native identity and all attributes from `AttributeRequests` from `AccountRequest`. 
+Modify it as you need and return it.
 
-`applications` - list of application names to be set to simulation mode
-`simulateStatus` - provisioningResult to be returned from simulated application. Available values are: `queued`, `committed`, `failed`. When not set, the default value is `commited`.  
-`turnOffSimulation` - Boolean setting. When set to ‘true’, any configured simulation will be turned off. `simulateStatus` and `applications`settings will be ignored. This takes precedence.
-
-Example usage:
-
-```xml
-<SimulateProvisioning turnOffSimulation="true"/>
-```
-
+<div class="my_info">
 Ensure that you turn off simulation at the end of your test case unless you need the simulation mode to stay configured in your IdentityIQ instance.
+</div>
 
 ### TimeMachine
 
