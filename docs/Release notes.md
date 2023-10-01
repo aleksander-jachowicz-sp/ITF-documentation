@@ -86,4 +86,10 @@ IntelliJ plugin version 1.9.2
 
 1. Java - ITF test case reference contributor.
 2. Find JUnit class with current test case.
+
+## 4.8.5
+
+1. Bugfix: Error while importing test identity when placed in <ObjectsToLoad> tag with a different file name.
+2. Bugfix: Correctly validating Link multivalued attribute when it has only single value.
+
 [Top](/wiki/spaces/ITF/pages/18022739/ITF+XML+Reference)
