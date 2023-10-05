@@ -2,8 +2,7 @@ version: 2
 build:
   os: ubuntu-22.04
 formats:
-  - html
-  - zip
+  - htmlzip
   - pdf
 mkdocs:
   configuration: mkdocs.yml
