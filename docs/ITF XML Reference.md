@@ -37,11 +37,22 @@ the 1st and 2nd line represents the header that should be present in each test c
 
 `<Description>` - optional test case description.
 
-`<TestIdentity>` - node to provide the file name (without extension) of the identity that is being used for the test. The identity name should match the file name.
+`<TestIdentity>` - node to provide the file name (without extension) of the identity that is being used for the test. 
+The identity name should match the file name (but it's not mandatory).
 
 `<ObjectsToLoad>` - list of the objects to be loaded before test case processing. The order of loading is the same as order in the test case. test identity is loaded after all object from `<ObjectsToLoad>` are imported.
 
 `<TestCommands>` - place all you test commands in here ;-)
+
+### Object loading order
+It is important to understand the order in which objects are bing imported by ITF in to IdentityIQ before the test case is executed. 
+The order is following:
+ 
+* Objects in `<ObjectsToLoad>` are loaded first, in the order they appear.
+* All approvers from all [CheckApprovals](#checkapprovals) commands present in the test case.
+* `<TestIdentity>` is loaded next. If a file with the name is not present, ITF assumes that the identity is already present in the system. 
+If it's not present, exception will be thrown.
+* All objects from all [LoadObjects](#loadobjects) command are loaded. They will be re-imported again once ITF reaches the command in the test case. 
 
 ## ITF Commands
 
@@ -451,6 +462,33 @@ Command will only work with objects that have name attribute
 `isRegex` - when set to true, `NamePrefix` will be treated as regular expression to match object names for deletion. When set to false `NamePrefix` will be used as simple prefix to match object names to delete.
 
 Use wisely. Wrong usage and configuration may result in deletion of large amounts of data
+
+### Connector
+
+Command to execute provisioning based on the provisioning plan. It will not recompile the plan. 
+Command instantiates the connector and executes the plan directly without using provisioner. 
+The result of provisioning will not be applied to identity in IIQ.
+The main purpose of this command is clean data before or after the test case in target systems.
+
+```xml
+<Connector failOnException="true" throwOnFailedResult="true" logDisplayName="Remove OpenLDAP group">
+    <Plan identityName="Angela.Bell">
+        <AccountRequest application="OpenLDAP" op="Modify" nativeIdentity="cn=Angela.Bell,ou=users,dc=example,dc=org">
+            <AttributeRequest name="groups" op="Remove" value="cn=employees,ou=groups,dc=example,dc=org"/>
+        </AccountRequest>
+    </Plan>
+</Connector>
+```
+
+`failOnException` - when set to true, command will throw exception when any exception occurs during provisioning. Default value is false.
+
+`throwOnFailedResult` - when set to true, command will throw exception when provisioning result is not success. Default value is false.
+
+`logDisplayName` - see [here](#logdisplayname).
+
+`Plan` - [provisioning plan](#plan) to execute. Mandatory. This plan must target external application (this can't be IIQ plan).
+This plan must contain only one accountRequest.
+ 
 
 ### LoadObjects
 
@@ -1112,3 +1150,7 @@ Schema representing provisioning plan. XML elements naming is the same as origin
 	</Requesters>
 </Plan>
 ```
+
+#### logDisplayName
+
+`logDisplayName` - String to display in the log file next to the command name. It is used to make the log file more readable.
