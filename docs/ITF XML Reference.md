@@ -612,7 +612,7 @@ Command to execute provisioning plan. Provided plan will be compiled and execute
 
 ### RunRule
 
-This command let’s you run any beanshell rule with parameters.
+This command lets you run any beanshell rule with parameters.
 
 ```xml
 <RunRule ruleName="test">
@@ -644,6 +644,8 @@ This command lets you run beanshell script you specify in the command.
 ```
 
 `<Source>` mandatory XML element inside which you should put the code of the script you wan to run. To avoid problems with XML it is recommended that you put all you source co between `<![CDATA[` and `]]>`.
+
+### RunTask
 
 ### RunWfl
 
@@ -931,7 +933,39 @@ Very often in IdentityIQ, any kind of data validation can only be done once the 
 
 `logDisplayName` - see link.
 
-see also: [runWfl command](/wiki/spaces/AR/pages/84475905)
+see also: [runWfl command](#runwfl)
+
+### WaitForTaskFinish
+
+Command to wait for task to finish. To identify that task is finished, ATF will search for the TaskResult with the name 
+prefix provided by mandatory attribute `resultPrefix`. Command will NOT start the task itself (if you want to fire up a task please look at [RunTask](#runtask)). It is expected that the task is started 
+by the test case before this command is executed or by some other process in IIQ. Command will only search for tasks that 
+are started after the whole test case started. 
+
+Command will throw exception if the task result (representing the task) is not found or if the task is not finished within the configured time out.
+
+```xml
+<WaitForTaskFinish resultPrefix="Acme task tester" timeOutSec="40" result="Success">
+    <Attributes>
+        <entry key="durationSeconds">
+            <value>
+                <Integer>30</Integer>
+            </value>
+        </entry>
+    </Attributes>
+</WaitForTaskFinish>
+```
+**Properties:**
+
+`resultPrefix` - mandatory, prefix of the task result name. Command will search for the task result with the name starting with this prefix.
+
+`timeOutSec` - optional, number of seconds to wait for task to finish before throwing exception. Default value is 60 seconds.
+
+`result` - optional, expected result of the task. If not provided, any result will be accepted. If provided, command will wait for the task to finish with the provided result. 
+If the task finishes with different result, exception will be thrown.
+
+`Attributes` - optional, list of attributes to be validated against the task result. If provided, command will wait for the task to finish, 
+and then it will validate the attributes of the task result.
 
 ### WaitForWflStep
 
