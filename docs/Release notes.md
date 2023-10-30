@@ -96,7 +96,7 @@ IntelliJ plugin version 1.9.2
 
 1. CancelAccessRequest command
 2. failOnExists for approvals
-3. Wait for that to finish command
+3. Wait for task to finish command
 4. Internal: Simulation now works based on single integration config and configuration is placed in custom object. 
 
 [Top](/wiki/spaces/ITF/pages/18022739/ITF+XML+Reference)
