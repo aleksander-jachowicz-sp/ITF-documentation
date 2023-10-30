@@ -129,6 +129,8 @@ There are two, most common, types of `WorkItems` supported by ITF (for now): app
 
 ##### ApprovalSet approvals
 
+Currently supported workItem types are `Approval` and `ManualAction`.
+
 ```xml
 <CheckApprovals>
   <ApprovalLevel>
@@ -150,8 +152,39 @@ There are two, most common, types of `WorkItems` supported by ITF (for now): app
   </ApprovalLevel>
 </CheckApprovals>
 ```
-
 This example shows expected approval based on approvalSet. `<Approver>` is the expected owner of the workItem and `<ApprovalItems>` is the list of approvalItems. In this case this is an approval of two roles being assigned.
+
+```xml
+<CheckApprovals logDisplayName="Manual workitem">
+    <ApprovalLevel>
+        <Approval type="ManualAction">
+            <ApprovalItems>
+                <ApprovalItem applicationName="Simulate LDAP" 
+                              nativeIdentity="cn=Harry Dixon,ou=users,dc=sim,dc=com" 
+                              operation="Create" 
+                              decision="approve">
+                    <Item>
+                        <String>cn = 'Harry Dixon'</String>
+                        <String>givenName = 'Harry'</String>
+                        <String>sn = 'Dixon'</String>
+                        <String>l = 'London'</String>
+                        <String>objectClass = 'top, inetOrgPerson, person, organizationalPerson'</String>
+                    </Item>
+                </ApprovalItem>
+            </ApprovalItems>
+            <Approver>spadmin</Approver>
+            <Target>Harry.Dixon</Target>
+        </Approval>
+    </ApprovalLevel>
+</CheckApprovals>
+```
+This example shows expected ManualAction workItem. Another difference from the previous example is that `item` is of type 
+List of Strings and is represented as nested `<Item>` element.
+
+`<Approval>` - represents single workItem that you expect to find and approve or deny. It can be of type `Approval` or `ManualAction`.
+the default type is `Approval`.
+
+`<ApprovalItem>` - represents single approval item expected in ApprovalSet.
 
 `applicationName` - name of the application for which the approval item belongs. In case of roles they are part of IdentityIQ, and that literal should be used.
 
@@ -159,11 +192,15 @@ This example shows expected approval based on approvalSet. `<Approver>` is the e
 
 `attributeName` - name of the attribute for the item. For roles use `assignedRoles` literal.
 
-`item` - value of the approval item being approved. In most cases this will be the name of the role or entitlement being approved.
+`item` - value of the approval item being approved. This is an equivalent of the `value` attribute in `ApprovalItem`. 
+In most cases this will be the name of the role or entitlement being approved. This can be an attribute of `ApprovalItem` 
+or a nested element `<Item>`. In the latter case, the value of the item is a list of strings. You can't have both 
+attribute `item` and nested `<Item>` element in the same `ApprovalItem`. 
 
 `decision` - the approval decision you want the test case to perform. This can be `approve` or `deny`.
 
-For approvals with approvalSet, the workItem will not be approved until there is a decision specified for each item. In the example above, Michael Miller approved role Designer and denies role Business Analyst.
+For approvals with approvalSet, the workItem will not be approved until there is a decision specified for each item. 
+In the first example above, Michael Miller approved role Designer and denies role Business Analyst.
 
 Finally, to summarize the above information, the final approval command for the example scenario looks similar to this:
 
@@ -213,9 +250,34 @@ Finally, to summarize the above information, the final approval command for the 
 
 In case of simple one level one person approval, the list of lists will actually be reduced to one element lists like this:
 
+###### Fail when approval exists
+
+Sometimes during test you have to make sure that correct behaviour is when the WorkItem is NOT generated.
+For this reason you can use boolean attribute `failOnExists` of `<CheckApprovals>` element. 
+When set to `true` the test will fail if the approval exists. The default value is `false`.
+Consider below example:
+```xml
+<CheckApprovals logDisplayName="Make sure manager approval is gone" failOnExists="true">
+    <ApprovalLevel>
+        <Approval>
+            <Target>Betty.Young</Target>
+        </Approval>
+    </ApprovalLevel>
+</CheckApprovals>
+```
+When you are expecting an approval, you need to provide all the details of the approval to find just the right one and 
+to make sure it contains all correct attributes as described in previous section.
+On the other hand, when you are checking that approval is not created you may want to provide only the minimum information 
+to be sure that the approval is not there. In the example above, we are checking that ANY approval for Betty Young is not there.
+So when using `failOnExists` attribute, you can omit any(within a reason) attributes of `<Approval>` and `<ApprovalItem>` elements.
+
+Obviously the `decision` attribute is not applicable in this case and if provided it's ignored.
+
 ##### Form approvals
 
-These are the type of approval WorkItems that contain a custom form that needs to be filled out and submitted. The goals of ITF in this case is to detect that such workItem is generated for an owner, fill out the form with specified values, validate selected fields and submit the form to progress the workflow.
+These are the type of approval WorkItems that contain a custom form that needs to be filled out and submitted.
+The type of such WorkItems is `Form`. The goals of ITF in this case is to detect that such workItem is generated for an owner, 
+fill out the form with specified values, validate selected fields and submit the form to progress the workflow.
 
 The `<ApprovalLevel>` list of lists structure stays the same. The difference is replacement of `<ApprovalItems>` with a`<Form>`.
 
@@ -308,6 +370,27 @@ will be handled by applications create policy. Therefore, ensure that your appli
 `<Workgroup>` - workgroup to which identity should be added. Can be used multiple times in `<Assign>` command.
 
 `<Entitlement>` - Entitlement to add to the identity. Attributes: `applicationName`, `attributeName`, `value`. Can be used multiple times in `<Assign>` command. If identity doesn’t have the account on the application it will be created. If there are multiple accounts in the application a random one will be used to assign the entitlement.
+
+### CancelAccessRequest
+
+`cancelAccessRequest` command allows you to cancel access request. It will cancel the latest request for the identity 
+specified by TestIdentity. If there is no TestIdentity in the test case, you can provide the name of the identity to 
+cancel request for in the nested `<IdentityName>` element. 
+
+This command mimics the behavior of the cancel button on the access request list page.
+
+```xml
+<CancelAccessRequest reason="I'm testing this">
+    <IdentityName>Betty.Young</IdentityName>
+</CancelAccessRequest>
+```
+
+**Tags:**
+
+`reason` - optional attribute to provide business reason during cancellation of the request.
+
+`<IdentityName>` - optional name of the identity to cancel request for. 
+When `<IdentityName>` is not present, ITF will use the identity specified by TestIdentity.
 
 ### CheckAudit
 
