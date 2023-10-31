@@ -58,14 +58,17 @@ If it's not present, exception will be thrown.
 
 ### Aggregate
 
-Command to aggregate selected account(s) from target application. This command will perform actual aggregation from a target system in the same way IdentityIQ does.
+Command to aggregate selected account(s) from target application. This command will perform actual aggregation from a 
+target system in the same way IdentityIQ does.
 
-This will only work with applications that support getObject. For example, it will work with LDAP or AD, but will not work for file base applications. For such aggregations consider using [mockedAggregate <MockedAggregate>](/wiki/spaces/AR/pages/45088773) command.
+This will only work with applications that support getObject. For example, it will work with LDAP or AD, but will not 
+work for file base applications. For such aggregations consider using [mockedAggregate <MockedAggregate>](/wiki/spaces/AR/pages/45088773) command.
 
-Some aggregation attributes are set to the following defaults promoteAttributes: true, correlateEntitlements: false, noOptimizeReaggregation: true. You can change them by adding attributes property.
+Some aggregation attributes are set to the following defaults promoteAttributes: true, correlateEntitlements: false, 
+noOptimizeReaggregation: true. You can change them by adding attributes property.
 
 ```xml
-<Aggregate logDisplayName="Real aggregation">
+<Aggregate logDisplayName="Real aggregation" failOnException="false">
   <AccountsList>
     <Account applicationName="SAP" nativeIdentity="John.Doe"/>
   </AccountsList>
@@ -78,7 +81,8 @@ Some aggregation attributes are set to the following defaults promoteAttributes:
 
 **Properties:**
 
-`attributes` (optional) - List of attributes the will be passed to Aggregator class during execution of this command (refer to IdentityIQ documentation on aggregation for these attribute details). By default, these are set as follows:
+`attributes` (optional) - List of attributes the will be passed to Aggregator class during execution of this command 
+(refer to IdentityIQ documentation on aggregation for these attribute details). By default, these are set as follows:
 
 * promoteAttributes: true,
 * correlateEntitlements: false,
@@ -86,9 +90,14 @@ Some aggregation attributes are set to the following defaults promoteAttributes:
 
 You can overwrite them if needed.
 
-`accounts` - list of pairs (you can aggregate multiple accounts in one command). Each pair requires the name of the application and native identity of the account you want aggregated.
+`accounts` - list of pairs (you can aggregate multiple accounts in one command). Each pair requires the name of the 
+application and native identity of the account you want aggregated.
 
-The success of this command relies on the proper data being present in the target system. Therefore, unless you are testing the aggregation itself, it may be better to use mockedAggregate command.
+`failOnException` - optional attribute. When set to true, the command will fail if any exception is thrown during 
+aggregation. For example if the account is not found in the target system. The default value is false.
+
+The success of this command relies on the proper data being present in the target system. Therefore, unless you are 
+testing the aggregation itself, it may be better to use mockedAggregate command.
 
 ### CheckApprovals
 
