@@ -99,4 +99,8 @@ IntelliJ plugin version 1.9.2
 3. Wait for task to finish command
 4. Internal: Simulation now works based on single integration config and configuration is placed in custom object. 
 
+## 4.10
+
+1. Single approval command 
+
 [Top](/wiki/spaces/ITF/pages/18022739/ITF+XML+Reference)

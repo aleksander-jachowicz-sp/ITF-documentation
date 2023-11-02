@@ -99,6 +99,68 @@ aggregation. For example if the account is not found in the target system. The d
 The success of this command relies on the proper data being present in the target system. Therefore, unless you are 
 testing the aggregation itself, it may be better to use mockedAggregate command.
 
+### Approval
+
+This is a single approval item that is the same as nested `Approval` element in [CheckApprovals](#checkapprovals) command.
+The only different is that `Approval` contains now attribute `failOnExists` which has the same bahaviour as the same 
+attribute in `CheckApprovals` command.
+
+### Assign
+
+Assign command allows assignment of links, entitlements, roles and workgroups. Command will assign specified object to the identity specified by TestIdentity. Depending on the type of object, direct api call(workgroup) or provisioning plan and `Provisioner`(link, entitlement, bundle) will be used.
+
+```xml
+<Assign logDisplayName="Assigning object to identity">>
+  <IdentityName>John.Doe</IdentityName>
+  <Bundle>BusinessAnalyst</Bundle>
+  <Entitlement applicationName="LDAP" attributeName="groups" value="cn=BusinessAnalystGroup,ou=groups,dc=acme,dc=com"/>
+  <Entitlement attributeName="memberOf" value="Programmers" applicationName="LDAP"/>
+  <Link applicationName="LDAP" nativeIdentity="cn=AlexHayes,ou=Users,dc=acme,dc=com"/>
+  <Link applicationName="LDAP" nativeIdentity="cn=AlexHayes Admin,ou=Users,dc=acme,dc=com"/>
+  <Workgroup>Workers</Workgroup>
+</Assign>
+```
+**Tags:**
+
+`<IdentityName>` - Name of the identity to assign all the objects to. When [TestIdentity] is present in the test case and you want to assign objects to that identity, you can omit `<IdentityName>`.
+
+`<Link>` - Link to be assigned to the identity. Can be used multiple times in `<Assign>` command to create multiple accounts.
+
+`<Link>` attributes:
+
+`applicationName` - Name of the application to assign. Mandatory.
+
+`nativeIdentity` - Native Identity of the account that is being assigned.
+When `nativeIdentity` is not present, ITF assumes that account creation(including account name creation) 
+will be handled by applications create policy. Therefore, ensure that your application create policy is in place.
+
+`<Bundle>` - role name to be assigned to identity. Can be used multiple times in `<Assign>` command.
+
+`<Workgroup>` - workgroup to which identity should be added. Can be used multiple times in `<Assign>` command.
+
+`<Entitlement>` - Entitlement to add to the identity. Attributes: `applicationName`, `attributeName`, `value`. Can be used multiple times in `<Assign>` command. If identity doesn’t have the account on the application it will be created. If there are multiple accounts in the application a random one will be used to assign the entitlement.
+
+### CancelAccessRequest
+
+`cancelAccessRequest` command allows you to cancel access request. It will cancel the latest request for the identity 
+specified by TestIdentity. If there is no TestIdentity in the test case, you can provide the name of the identity to 
+cancel request for in the nested `<IdentityName>` element. 
+
+This command mimics the behavior of the cancel button on the access request list page.
+
+```xml
+<CancelAccessRequest reason="I'm testing this">
+    <IdentityName>Betty.Young</IdentityName>
+</CancelAccessRequest>
+```
+
+**Tags:**
+
+`reason` - optional attribute to provide business reason during cancellation of the request.
+
+`<IdentityName>` - optional name of the identity to cancel request for. 
+When `<IdentityName>` is not present, ITF will use the identity specified by TestIdentity.
+
 ### CheckApprovals
 
 Command to check and/or execute approvals in the workflow.
@@ -187,7 +249,7 @@ This example shows expected approval based on approvalSet. `<Approver>` is the e
     </ApprovalLevel>
 </CheckApprovals>
 ```
-This example shows expected ManualAction workItem. Another difference from the previous example is that `item` is of type 
+This example shows expected ManualAction workItem. Another difference from the previous example is that `item` is of type
 List of Strings and is represented as nested `<Item>` element.
 
 `<Approval>` - represents single workItem that you expect to find and approve or deny. It can be of type `Approval` or `ManualAction`.
@@ -201,14 +263,14 @@ the default type is `Approval`.
 
 `attributeName` - name of the attribute for the item. For roles use `assignedRoles` literal.
 
-`item` - value of the approval item being approved. This is an equivalent of the `value` attribute in `ApprovalItem`. 
-In most cases this will be the name of the role or entitlement being approved. This can be an attribute of `ApprovalItem` 
-or a nested element `<Item>`. In the latter case, the value of the item is a list of strings. You can't have both 
-attribute `item` and nested `<Item>` element in the same `ApprovalItem`. 
+`item` - value of the approval item being approved. This is an equivalent of the `value` attribute in `ApprovalItem`.
+In most cases this will be the name of the role or entitlement being approved. This can be an attribute of `ApprovalItem`
+or a nested element `<Item>`. In the latter case, the value of the item is a list of strings. You can't have both
+attribute `item` and nested `<Item>` element in the same `ApprovalItem`.
 
 `decision` - the approval decision you want the test case to perform. This can be `approve` or `deny`.
 
-For approvals with approvalSet, the workItem will not be approved until there is a decision specified for each item. 
+For approvals with approvalSet, the workItem will not be approved until there is a decision specified for each item.
 In the first example above, Michael Miller approved role Designer and denies role Business Analyst.
 
 Finally, to summarize the above information, the final approval command for the example scenario looks similar to this:
@@ -262,7 +324,7 @@ In case of simple one level one person approval, the list of lists will actually
 ###### Fail when approval exists
 
 Sometimes during test you have to make sure that correct behaviour is when the WorkItem is NOT generated.
-For this reason you can use boolean attribute `failOnExists` of `<CheckApprovals>` element. 
+For this reason you can use boolean attribute `failOnExists` of `<CheckApprovals>` element.
 When set to `true` the test will fail if the approval exists. The default value is `false`.
 Consider below example:
 ```xml
@@ -274,9 +336,9 @@ Consider below example:
     </ApprovalLevel>
 </CheckApprovals>
 ```
-When you are expecting an approval, you need to provide all the details of the approval to find just the right one and 
+When you are expecting an approval, you need to provide all the details of the approval to find just the right one and
 to make sure it contains all correct attributes as described in previous section.
-On the other hand, when you are checking that approval is not created you may want to provide only the minimum information 
+On the other hand, when you are checking that approval is not created you may want to provide only the minimum information
 to be sure that the approval is not there. In the example above, we are checking that ANY approval for Betty Young is not there.
 So when using `failOnExists` attribute, you can omit any(within a reason) attributes of `<Approval>` and `<ApprovalItem>` elements.
 
@@ -285,7 +347,7 @@ Obviously the `decision` attribute is not applicable in this case and if provide
 ##### Form approvals
 
 These are the type of approval WorkItems that contain a custom form that needs to be filled out and submitted.
-The type of such WorkItems is `Form`. The goals of ITF in this case is to detect that such workItem is generated for an owner, 
+The type of such WorkItems is `Form`. The goals of ITF in this case is to detect that such workItem is generated for an owner,
 fill out the form with specified values, validate selected fields and submit the form to progress the workflow.
 
 The `<ApprovalLevel>` list of lists structure stays the same. The difference is replacement of `<ApprovalItems>` with a`<Form>`.
@@ -344,62 +406,6 @@ In ITF you can validate if there was policy violation triggered during the LCM r
 `<PolicyViolation>` one or more `<PolicyName>` elements which represent expected policy violations generated when IIQ created the workfItem.
 
 `validateUnlistedPolicies` - Boolean attribute(default false). When false ITF will only check if listed `<PolicyName>`'s policies were present on the approval. When set to true framework will also check if there are any policy violations on the approval which are not listed in the `<PolicyViolation>` element and if there are exceptions will be thrown. Using `<PolicyViolation`\> with `validateUnlistedPolicies="true"` and no `<PolicyName>` you can validate that there were no policies generated during the creation of the approval.(`<PolicyViolation validateUnlistedPolicies="true"/>`)
-
-### Assign
-
-Assign command allows assignment of links, entitlements, roles and workgroups. Command will assign specified object to the identity specified by TestIdentity. Depending on the type of object, direct api call(workgroup) or provisioning plan and `Provisioner`(link, entitlement, bundle) will be used.
-
-```xml
-<Assign logDisplayName="Assigning object to identity">>
-  <IdentityName>John.Doe</IdentityName>
-  <Bundle>BusinessAnalyst</Bundle>
-  <Entitlement applicationName="LDAP" attributeName="groups" value="cn=BusinessAnalystGroup,ou=groups,dc=acme,dc=com"/>
-  <Entitlement attributeName="memberOf" value="Programmers" applicationName="LDAP"/>
-  <Link applicationName="LDAP" nativeIdentity="cn=AlexHayes,ou=Users,dc=acme,dc=com"/>
-  <Link applicationName="LDAP" nativeIdentity="cn=AlexHayes Admin,ou=Users,dc=acme,dc=com"/>
-  <Workgroup>Workers</Workgroup>
-</Assign>
-```
-**Tags:**
-
-`<IdentityName>` - Name of the identity to assign all the objects to. When [TestIdentity] is present in the test case and you want to assign objects to that identity, you can omit `<IdentityName>`.
-
-`<Link>` - Link to be assigned to the identity. Can be used multiple times in `<Assign>` command to create multiple accounts.
-
-`<Link>` attributes:
-
-`applicationName` - Name of the application to assign. Mandatory.
-
-`nativeIdentity` - Native Identity of the account that is being assigned.
-When `nativeIdentity` is not present, ITF assumes that account creation(including account name creation) 
-will be handled by applications create policy. Therefore, ensure that your application create policy is in place.
-
-`<Bundle>` - role name to be assigned to identity. Can be used multiple times in `<Assign>` command.
-
-`<Workgroup>` - workgroup to which identity should be added. Can be used multiple times in `<Assign>` command.
-
-`<Entitlement>` - Entitlement to add to the identity. Attributes: `applicationName`, `attributeName`, `value`. Can be used multiple times in `<Assign>` command. If identity doesn’t have the account on the application it will be created. If there are multiple accounts in the application a random one will be used to assign the entitlement.
-
-### CancelAccessRequest
-
-`cancelAccessRequest` command allows you to cancel access request. It will cancel the latest request for the identity 
-specified by TestIdentity. If there is no TestIdentity in the test case, you can provide the name of the identity to 
-cancel request for in the nested `<IdentityName>` element. 
-
-This command mimics the behavior of the cancel button on the access request list page.
-
-```xml
-<CancelAccessRequest reason="I'm testing this">
-    <IdentityName>Betty.Young</IdentityName>
-</CancelAccessRequest>
-```
-
-**Tags:**
-
-`reason` - optional attribute to provide business reason during cancellation of the request.
-
-`<IdentityName>` - optional name of the identity to cancel request for. 
-When `<IdentityName>` is not present, ITF will use the identity specified by TestIdentity.
 
 ### CheckAudit
 
