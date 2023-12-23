@@ -56,6 +56,14 @@ If it's not present, exception will be thrown.
 
 ## ITF Commands
 
+### IdentityCommand
+This is not a command but a command type.
+It is any command that operates on test identity. When using such command you don't have to specify `<IdentityName>` tag, 
+command will use test identity by default. 
+When `<IdentityName>` is present in the test case, it will be used instead of `<TestIdentity>`. 
+Test identity can be set by `<TestIdentity>` tag in the test case or by `<SetTestIdentity>` command.
+Each command that is of type IdentityCommand will have this information in the description. 
+
 ### Aggregate
 
 Command to aggregate selected account(s) from target application. This command will perform actual aggregation from a 
@@ -107,6 +115,8 @@ attribute in `CheckApprovals` command.
 
 ### Assign
 
+[Identity command](#identitycommand)
+
 Assign command allows assignment of links, entitlements, roles and workgroups. Command will assign specified object to the identity specified by TestIdentity. Depending on the type of object, direct api call(workgroup) or provisioning plan and `Provisioner`(link, entitlement, bundle) will be used.
 
 ```xml
@@ -141,6 +151,8 @@ will be handled by applications create policy. Therefore, ensure that your appli
 `<Entitlement>` - Entitlement to add to the identity. Attributes: `applicationName`, `attributeName`, `value`. Can be used multiple times in `<Assign>` command. If identity doesn’t have the account on the application it will be created. If there are multiple accounts in the application a random one will be used to assign the entitlement.
 
 ### CancelAccessRequest
+
+[Identity command](#identitycommand)
 
 `cancelAccessRequest` command allows you to cancel access request. It will cancel the latest request for the identity 
 specified by TestIdentity. If there is no TestIdentity in the test case, you can provide the name of the identity to 
@@ -409,6 +421,8 @@ In ITF you can validate if there was policy violation triggered during the LCM r
 
 ### CheckAudit
 
+[Identity command](#identitycommand)
+
 `checkAudit` command lets you validate audit events generated during execution of your test case. You can check content of each audit including skipping some of the attribute. Experience shows that this command is mostly useful when validating content of custom audit events.
 
 `checkAudit` command works by changing each expected audit object in to query and searches for it with addition of checking that it was generated after the start of the test case. Because of that, even if `action` is the only required property, make sure that you provide enough other properties values so that the search makes sens and provides validations to you test case. For example, if you were to create an expected audit object with value only for action property, ITF would check if any audit event with such action was created since the beginning of the test case. If this is good enough for what you are validating, it's OK. But most of the time you would probably want to check the content of such event too.
@@ -504,6 +518,8 @@ Command will search for a Request object matching configured criteria. If the re
 `throwWhenExistsAfterTimeout` when set to true and after the request is found and ITF already waited configured amount of time and the request is still present, ITF will thro exception. Otherwise ITF will just finish the command.
 
 ### Clean
+
+[Identity command](#identitycommand)
 
 Clean command. This command deletes various IdentityIQ objects depending on settings. This command is usually used at the very beginning or at the end of the test case. Its purpose is to clean up data before running a test, or clean up the system after the test has been completed. This command uses Terminator to delete objects.
 
@@ -674,6 +690,8 @@ Some aggregation attributes are set to the following defaults promoteAttributes:
 
 ### ProcessEvents
 
+[Identity command](#identitycommand)
+
 A significant part of the processing in IdentityIQ is based on life cycle events. `processEvents` command is the way to help you test the correctness of your events configuration. It is basically similar to running Identity refresh task with `processTriggers` option checked with filter set for the [testIdentity]. After running refresh command will check if there is a task result present with the name starting with `triggerName` attribute + “:” + name of the test identity. If such task result is found, command execution is considered successful. It throws otherwise. Command will timeout waiting for the task result after 20 seconds.
 
 Internally, command uses `Identitizer` with “processEvents” enabled. Command launches lifecycle’s configured workflow synchronously.
@@ -695,6 +713,8 @@ You must have `testIdentity/<TestIdentity>` set in your test case to use this co
 `<identityTrigger>` - Name of the life cycle event that is expected to be triggered by the command.
 
 ### Provision
+
+[Identity command](#identitycommand)
 
 Command to execute provisioning plan. Provided plan will be compiled and executed using `sailpoint.api.Provisioner` class. Please see [<Plan>](#plan) section of Common objects schemas chapter for detailed example of plan xml representation.
 
@@ -789,6 +809,48 @@ Run workflow command gives you the ability to run any workflow with a predefined
 
 `<Plan>` - Provisioning plan is a special parameter that deserves special treatment. You specify the plan on a dedicated attribute. XML schema will guide you with plan configuring. It is very similar to IIQ’s provisioning plan xml representation.
 
+### SetTestIdentity
+
+(IdentityCommand)
+
+Command to set test identity to any arbitrary identity. Main use case is when IIQ aggregates data from authoritative source and generates
+identities but the identity name is not known. You can use this command to find the correct identity by name or other known data and set it as
+Test Identity to be used by commands that follow. Make sure that all commands that follow can read default Test Identity. You can use either rule
+or a script to find test identity. Rule or a script must return existing identity name.
+
+Script version:
+```xml
+<SetTestIdentity throwWhenNull="true" throwWhenNotNull="false">
+    <Script><![CDATA[
+                return "Joan.Wells";
+            ]]></Script>
+</SetTestIdentity>
+```
+**Tags:** 
+
+`<Script>` - Script to be executed to find test identity. Script must return identity name (String).
+
+Rule version:
+```xml
+<SetTestIdentity throwWhenNull="true" throwWhenNotNull="false" ruleName="findAggregateIdentity">
+    <Attributes>
+        <entry key="empId" value="1b2b3c4b"/>
+    </Attributes>
+</SetTestIdentity>
+```
+**Tags:** 
+
+`ruleName` - Name of the rule to be executed to find test identity. Rule must return identity name (String).
+`<Attributes>` - List of attributes to be passed to the rule as input arguments.
+
+`throwWhenNull` - when true (default is true) if result of rule or script is null command will throw exception.
+In case script or rule returns as string, command will check if returned identity exists in IdentityIQ. If it does not, it will throw exception.
+When set to true command will set test identity to null and finish successfully.
+
+`throwWhenNotNull` - when true (default is false) if result of rule or script is not null command will throw exception.
+
+You can't set both `throwWhenNull` and `throwWhenNotNull` to true at the same time. 
+
 ### SimulateProvisioning
 
 When testing internal IdentityIQ configurations, the actual external provisioning is not important if your applications 
@@ -862,6 +924,8 @@ Individually all three attributes above are optional but together one of them mu
 `reset`(optional) Boolean. When set to true ITF will reset time machine to system time and data. In such case all other time changing attributes are ignored.
 
 ### ValidateResult
+
+[Identity command](#identitycommand)
 
 Command to validate attribute values of various objects.
 
@@ -1192,6 +1256,8 @@ Only one of `<NameOrId>`, `<FilterString>`, `<HqlQuery>`can be used at the same 
 `<ExpectedValue>` - Node that contains the value to be validated against what resides in the pace specified by xpath expression.
 
 ### CheckApprovalExpirationResult
+
+[Identity command](#identitycommand)
 
 Sometimes it is needed to test the behavior of the approval which is a part of Identity Request. Checking exitance of such approvals and acting on them can be done with <CheckApprovals> command, but to validate what happens on the expiration requires this dedicated command.
 
