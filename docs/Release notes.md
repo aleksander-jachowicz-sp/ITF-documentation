@@ -104,5 +104,8 @@ IntelliJ plugin version 1.9.2
 1. Single approval command 
 2. SetTestIdentity command
 3. WaitForWflFinish command enhancement
+4. Email notifier now supports ootb and custom notifiers.
+5. Validating account attributes directly in target system.
+4. Bugfixes
 
 [Top](/wiki/spaces/ITF/pages/18022739/ITF+XML+Reference)
