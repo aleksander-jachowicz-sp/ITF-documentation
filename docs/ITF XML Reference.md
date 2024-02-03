@@ -457,7 +457,20 @@ In ITF you can validate if there was policy violation triggered during the LCM r
 
 Command to validate if email notification are being sent and to check their content.
 
-When ITF plugin is installed, system configuration item `emailNotifierClass` is set to `com.itf.server.ITFEmailNotifier` which is a custom ITF notifier (for details on custom email notifiers please check [this](https://community.sailpoint.com/t5/Technical-White-Papers/Best-Practices-Email-Configuration/ta-p/75930#toc-hId-182469073) Compass article). When any email is being sent by IdentityIQ this class will store a copy of it and grant `<CheckEmail>` command access to those saved emails. To validate if desired email is sent, attributes to, subject and EmailBody are being check against the emails stored by custom `ITFEmailNotifier`.
+When ITF plugin is installed, system configuration item `emailNotifierClass` is set to `com.itf.server.ITFEmailNotifier` 
+which is a custom ITF notifier. This notifier logs all emails sent by IdentityIQ and then invokes notification configured 
+in IIQ (Global Settings -> IdentityIQ Configuration -> Notification Setting Tab -> Email Notification Type).
+If in your environment custom email notifier is used, you can still use it with ITF, just configure it under `customEmailNotifierClass` 
+in system configuration XML. When any email is being sent by IdentityIQ `com.itf.server.ITFEmailNotifier` class will 
+store a copy of the email and grant `<CheckEmail>` command access to those saved emails.
+To validate if desired email is sent, attributes to, subject and EmailBody are being check against the emails stored by custom `ITFEmailNotifier`.
+
+<div class="my_note">
+    If you don't want to use ITF email validating capabilities delete com.itf.server.ITFEmailNotifier from emailNotifierClass item in system configuration. 
+</div> 
+
+For details on custom email notifiers please check 
+[this](https://community.sailpoint.com/t5/Technical-White-Papers/Best-Practices-Email-Configuration/ta-p/75930#toc-hId-182469073) Compass article. 
 
 For this command to work, your build must include IIQTester-simulator-x.x.jar provided in distribution zip file.
 
@@ -1083,7 +1096,16 @@ When `nativeIdentity` is not specified and there are other attributes present fo
 
 ### WaitForWflFinish
 
-Very often in IdentityIQ, any kind of data validation can only be done once the workflow processing is done. Also, even though most of the workflow related commands are synchronous (except for runWfl command with asynchronous option #LINK HERE), there may be situations where workflow is started asynchronously by the IdentityIQ configuration itself. `waitForWflFinish` command was designed for just such occasions. This command will perform busy waiting until workflow is finished. Finished status is determined by checking `isComplete()` method on `taskResult` of the workflow started previously by ATF test case. Successful finish is reported when workflow is finished and completion status was either `Success` or `Warning`. If there is no workflow being processed by the ATF is found, exception will be thrown. If the workflow doesn’t end within configured time out, exception will be thrown.
+#### RunWfl version
+Very often in IdentityIQ, any kind of data validation can only be done once the workflow processing is done. 
+Also, even though most of the workflow related commands are synchronous (except for runWfl command with asynchronous option #LINK HERE), 
+there may be situations where workflow is started asynchronously by the IdentityIQ configuration itself.
+`waitForWflFinish` command was designed for just such occasions. 
+This command will perform busy waiting until workflow started by [RunWfl command](#runwfl) is finished. 
+Finished status is determined by checking `isComplete()` method on `taskResult` of the workflow started previously by ATF test case. 
+Successful finish is reported when workflow is finished and completion status was either `Success` or `Warning`. 
+If there is no workflow being processed by the ATF is found, exception will be thrown. 
+If the workflow doesn’t end within configured time out, exception will be thrown.
 
 ```xml
 <WaitForWflFinish timeOutSec="60" logDisplayName="Waiting for workflow to finish"/>
@@ -1096,6 +1118,22 @@ Very often in IdentityIQ, any kind of data validation can only be done once the 
 `logDisplayName` - see link.
 
 see also: [runWfl command](#runwfl)
+
+#### Name based version
+You can wait for any workflow to finish by providing workflow name prefix. 
+Command will search for the task result with the name starting with the provided prefix.
+
+```xml
+<WaitForWflFinish taskResultNamePrefix="Workflow running for set time" timeOutSec="30" regex="false"/>
+```
+
+**Properties:**
+
+`taskResultNamePrefix` - mandatory, prefix of the task result name. Command will search for the task result with the name starting with this prefix.
+
+`timeOutSec` - optional, number of seconds to wait for workflow to finish before throwing exception. Default value is 40 seconds.
+
+`regex` - optional, when set to true, `taskResultNamePrefix` will be treated as regular expression to match task result names. Default value is false.
 
 ### WaitForTaskFinish
 

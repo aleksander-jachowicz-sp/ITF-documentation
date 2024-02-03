@@ -102,5 +102,7 @@ IntelliJ plugin version 1.9.2
 ## 4.10
 
 1. Single approval command 
+2. SetTestIdentity command
+3. WaitForWflFinish command enhancement
 
 [Top](/wiki/spaces/ITF/pages/18022739/ITF+XML+Reference)
