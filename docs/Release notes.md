@@ -108,4 +108,13 @@ IntelliJ plugin version 1.9.2
 5. Validating account attributes directly in target system.
 4. Bugfixes
 
+## 4.10.1
+
+1. bugfix: Back button in custom form approval now works properly. 
+
+## 4.10.2
+
+1. ITF configuration checker in Intellij plugin 
+2. Bugfix: Proper ITF client authentication to IIQ server
+
 [Top](/wiki/spaces/ITF/pages/18022739/ITF+XML+Reference)

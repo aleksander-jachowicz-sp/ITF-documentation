@@ -19,6 +19,7 @@ nav:
         - IIQ Connectivity: 'IIQ connectivity.md'
         - Running Test Cases in IIQ: 'Running test cases from IIQ.md'
         - Test identity generator: 'Test identity generator.md'
+        - Learn by example: 'Learn by example.md'
     - IntelliJ plugin:
         - Plugin capabilities: 'IntelliJFunc.md'
     - Release notes: 'Release notes.md'
