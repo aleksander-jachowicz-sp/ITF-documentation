@@ -117,4 +117,9 @@ IntelliJ plugin version 1.9.2
 1. ITF configuration checker in Intellij plugin 
 2. Bugfix: Proper ITF client authentication to IIQ server
 
+## 4.11
+
+1. Matching workItems for approval by Description.
+2. Throwing explicit exception when more than one approval matches the approval command.
+
 [Top](/wiki/spaces/ITF/pages/18022739/ITF+XML+Reference)

@@ -367,8 +367,9 @@ The `<ApprovalLevel>` list of lists structure stays the same. The difference is 
 ```xml
 <CheckApprovals>
   <ApprovalLevel>
-    <Approval>
+    <Approval matchDescriptionWithRegex="true">
       <Approver>Betty.Young</Approver>
+        <Description>Approval for .* user</Description>
         <Form>
           <Field fieldName="Location">
             <FieldValue>Timbuktu</FieldValue>
@@ -396,6 +397,10 @@ There is one decision for the whole approval which represents pressing next or b
 
 `<Decision>` element represents which button on the form is clicked. Possible values are approve and deny. Value approve is equivalent to pressing next button and deny, the back button. There is no option for cancel button.
 
+`<Description>` element is used to match the description of the workItem. 
+When `matchDescriptionWithRegex` is set to true, the description is treated as a regular expression. When set to false, the description is treated as a literal. This is useful when the description is dynamic and you want to match it with a regular expression.
+
+`<Approver>` element is used to match the owner of the workItem. When the `<Approver>` element is not present, the command will match the workItem with any owner.
 ITF supports custom forms that use models to propagate values between forms and workflow.
 
 **Policy violations**
