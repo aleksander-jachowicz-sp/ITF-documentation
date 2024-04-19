@@ -122,4 +122,8 @@ IntelliJ plugin version 1.9.2
 1. Matching workItems for approval by Description.
 2. Throwing explicit exception when more than one approval matches the approval command.
 
+## 4.12
+
+1. New improved CheckEmail command and EmailNotifierControl command to manage email notifications logging.
+
 [Top](/wiki/spaces/ITF/pages/18022739/ITF+XML+Reference)

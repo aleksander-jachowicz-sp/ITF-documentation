@@ -462,6 +462,10 @@ In ITF you can validate if there was policy violation triggered during the LCM r
 
 Command to validate if email notification are being sent and to check their content.
 
+Important !!!
+In order to be able to validate emails you have to turn on email logging using [EmailNotifierControl](#emailnotifiercontrol) 
+prior using `CheckEmail` command.
+
 When ITF plugin is installed, system configuration item `emailNotifierClass` is set to `com.itf.server.ITFEmailNotifier` 
 which is a custom ITF notifier. This notifier logs all emails sent by IdentityIQ and then invokes notification configured 
 in IIQ (Global Settings -> IdentityIQ Configuration -> Notification Setting Tab -> Email Notification Type).
@@ -621,6 +625,33 @@ The main purpose of this command is clean data before or after the test case in 
 `Plan` - [provisioning plan](#plan) to execute. Mandatory. This plan must target external application (this can't be IIQ plan).
 This plan must contain only one accountRequest.
  
+### EmailNotifierControl
+
+Command to manage ITF email notifier. Email notifier is responsible for logging all the emails being sent by IIQ and storing them
+so that [checkemail](#checkemail) command can validate them. 
+With logEmails attribute you can start and stop logging of the emails being sent.
+cleanEmails deletes any emails that may have been logged so far.
+If you want to use CheckEmail command you will have to use EmailNotifierControl to tur on email logging first.
+
+Email notifier will store only 100 emails. When the limit is reached, the oldest email will be deleted and the new one will be stored.
+
+<div class="my_note">
+    Do not forget to turn the logging off and clean the emails at the end of the test case. 
+    Other wise email notifier will keep logging all the emails sent by IIQ in memory.
+</div> 
+
+
+
+```xml
+<EmailNotifierControl logEmails="true" clearEmails="true"/>
+```
+
+**Attributes:**
+
+`logEmails` - boolean. When true email notifier will start logging all emails being sent by IdentityIQ. 
+When false email notifier will stop logging the emails.
+
+`clearEmails` - boolean. When true all emails logged so far will be deleted.
 
 ### LoadObjects
 
