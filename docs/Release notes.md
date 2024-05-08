@@ -126,4 +126,8 @@ IntelliJ plugin version 1.9.2
 
 1. New improved CheckEmail command and EmailNotifierControl command to manage email notifications logging.
 
+## 4.13
+
+1. New command: [InvokeTestCase](/ITF%20XML%20Reference/#invoketestcase)
+
 [Top](/wiki/spaces/ITF/pages/18022739/ITF+XML+Reference)

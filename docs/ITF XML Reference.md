@@ -653,6 +653,24 @@ When false email notifier will stop logging the emails.
 
 `clearEmails` - boolean. When true all emails logged so far will be deleted.
 
+### InvokeTestCase
+
+Command to invoke another test case. This is useful when you want to reuse one test case in another test case.
+This can potentially save you time and effort when you have a set of test cases that are similar, and you want to reuse them.
+You can put test data setup in one test case and then reuse it in other test cases.
+
+This command will include all commands from the specified test case in the current test case. This means that all commands from the included test case will be executed in the order they appear in the included test case.
+No other settings will be copied from the included test case. For example: testIdentity will not be copied, so you will have to set it in the current test case.
+
+```xml
+<InvokeTestCase testCaseName="Setup role"/>
+```
+
+**Attributes:**
+
+`testCaseName` - name of the test case to include in the current test case. This is mandatory. 
+
+
 ### LoadObjects
 
 The process of loading objects needed during the test case is primarily done using `objectsToLoad` list root test case attribute. Even so there may be situations when you need to load some test related IdentityIQ objects during the processing of the ITF test case. For example, when testing custom audit, prior to the test you want all audit for a test target deleted, but after the deletion you want to load one audit event which simulates something that have already happened before the test.
