@@ -130,4 +130,8 @@ IntelliJ plugin version 1.9.2
 
 1. New command: [InvokeTestCase](/ITF%20XML%20Reference/#invoketestcase)
 
+## 4.13.1
+
+1. ITF task results now end with guid.
+
 [Top](/wiki/spaces/ITF/pages/18022739/ITF+XML+Reference)
