@@ -1022,6 +1022,7 @@ Objects for which attributes can be validated are:
           <entry key="region" value="Europe"/>
           <entry key="costcenter" value="R01,L03"/>
           <entry key="email" value="Amanda.Ross@demoexample.com"/>
+          <entry key="IIQDisabled" value="false"/>
         </Attributes>
       </ExpectedLink>
     </ExpectedLinks>
@@ -1095,6 +1096,8 @@ Objects for which attributes can be validated are:
 `nativeIdentity` - When specified ITF will check if link with such `nativeIdentity` exists on the Identity. In not present, ITF will only validate existence, in the identity, of any link from the application specified by `applicationName`.
 
 When `nativeIdentity` is not specified and there are other attributes present for validation. ITF will pick the first link from the application `applicationName` on the identity and perform validation of the attributes against that link. There are no guaranties as to which is the “first” link. It depends on the order returned by IdentityIQ (and it is not guarantied in any way). Because of that, when validating link attributes (except just the link existence), it is recommended to specify `nativeIdentity` attribute in the test case.
+
+`IIQDisabled` - pseudo attribute. When set to true, ITF will check if the link is disabled. When set to false, ITF will check if the link is enabled.
 
 `<ExpectedManager>` - name of the manager identity to validate.
 
