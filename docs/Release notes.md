@@ -134,4 +134,8 @@ IntelliJ plugin version 1.9.2
 
 1. ITF task results now end with guid.
 
+## 4.13.2
+
+1. Link disable validation with pseudo attribute IIQDisabled
+
 [Top](/wiki/spaces/ITF/pages/18022739/ITF+XML+Reference)
