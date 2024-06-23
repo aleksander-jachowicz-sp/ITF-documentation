@@ -136,6 +136,7 @@ IntelliJ plugin version 1.9.2
 
 ## 4.13.2
 
-1. Link disable validation with pseudo attribute IIQDisabled
+1. Link disable validation with pseudo attribute IIQDisabled.
+2. Multithreaded ITF execution bugfix.
 
 [Top](/wiki/spaces/ITF/pages/18022739/ITF+XML+Reference)
