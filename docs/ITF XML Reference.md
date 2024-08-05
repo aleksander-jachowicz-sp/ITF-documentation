@@ -1009,7 +1009,7 @@ Objects for which attributes can be validated are:
                     validateUnlistedLinks="false" 
                     validateUnlistedRoles="false">
     <ExpectedLinks>
-      <ExpectedLink applicationName="HR_Contractors" nativeIdentity="2ff5">
+      <ExpectedLink applicationName="HR_Contractors" nativeIdentity="2ff5" throwIfExists="false">
         <Attributes>
           <entry key="inactiveIdentity" value="FALSE"/>
           <entry key="firstName" value="Amanda"/>
@@ -1085,6 +1085,8 @@ Objects for which attributes can be validated are:
 
 `validateUnlistedRoles`\- when set to true, ITF will throw in case there are roles on validated identity which are not present in the `<ExpectedRoles>` tag.
 
+`<Attributes>` - contains list of identity attribute entries to be validated. You can use `today+/-n` [pseudo value](/Pseudo%20date%20handling) as value here.
+
 `<ExpectedLinks>` - contains list of `<ExpectedLink>` tag to be validated.
 
 `<ExpectedLink>` - contains link data to be validated against validated identity.
@@ -1095,13 +1097,15 @@ Objects for which attributes can be validated are:
 
 `nativeIdentity` - When specified ITF will check if link with such `nativeIdentity` exists on the Identity. In not present, ITF will only validate existence, in the identity, of any link from the application specified by `applicationName`.
 
+`throwIfExists` - When set to true, ITF will throw if the link with such `nativeIdentity` exists on the identity. Default value is false.
+
 When `nativeIdentity` is not specified and there are other attributes present for validation. ITF will pick the first link from the application `applicationName` on the identity and perform validation of the attributes against that link. There are no guaranties as to which is the “first” link. It depends on the order returned by IdentityIQ (and it is not guarantied in any way). Because of that, when validating link attributes (except just the link existence), it is recommended to specify `nativeIdentity` attribute in the test case.
 
 `IIQDisabled` - pseudo attribute. When set to true, ITF will check if the link is disabled. When set to false, ITF will check if the link is enabled.
 
 `<ExpectedManager>` - name of the manager identity to validate.
 
-`<Attributes>` - contains list of identity attribute entries to be validated.
+`<Attributes>` - contains list of link attribute entries to be validated. You can use `today+/-n` [pseudo value](/Pseudo%20date%20handling) as value here.
 
 `<ExpectedRoles>` - Contains list of `<Role>` to be validated against the identity.
 

@@ -65,6 +65,25 @@ will be stored in clear text in the file. More over the settings in `servers.pro
 2. If you want your passwords to be more secure or computer names where you run the tests are unknown (or changing dynamically), 
 you can use system properties. Please [contact us](mailto:contact@amidentity.com) for details.  
 
+#### Running test case stored on the server from command line
+
+Run this command:
+```
+java -cp [classpath including itf libraries and it's dependencies] com.itf.test.CmdLineITFRunner ["name of the test case"] [IIQ url] [userName] [password]
+```
+
+Example:
+
+This is run from the root of the SSB build directory.
+```
+java -cp lib\*;.\itf\itfDependencies\* com.itf.test.CmdLineITFRunner "Setup Rita.Wheeler identity for test" http://localhost:8080/identityiq8.3 spadmin admin
+```
+
+If you want to include log4j configuration file to print out progress, you can use `-Dlog4j.configurationFile` system property.
+```
+java -Dlog4j.configurationFile=file:itf\resources\log4j2.properties -cp lib\*;.\itf\itfDependencies\* com.itf.test.CmdLineITFRunner "Setup Rita.Wheeler identity for test" http://localhost:8080/identityiq8.3 spadmin admin
+```
+
 ## Import and export IdentityIQ objects, retrieve commands
 
 All functionality of ITF IntelliJ plugin except running test cases uses below mechanism to obtain IIQ server credentials.

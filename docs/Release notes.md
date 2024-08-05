@@ -139,4 +139,12 @@ IntelliJ plugin version 1.9.2
 1. Link disable validation with pseudo attribute IIQDisabled.
 2. Multithreaded ITF execution bugfix.
 
+## 4.13.3
+
+1. Bugfix: accepting null ResourceObject on MockedAggregation command.
+2. BugFix: running schema customization rules on MockedAggregation command.
+3. throwIfExists option for ExpectedLink of [ValidateResult](/ITF%20XML%20Reference/#validateresult) command.
+4. You can now use [pseudo attribute today](/Pseudo%20date%20handling) in [ValidateResult](/ITF%20XML%20Reference/#validateresult) command for validating identity and link attributes.
+5. Running test cases stored in IIQ from command line [here](/IIQ%20connectivity/#running-test-case-stored-on-the-server-from-command-line).
+
 [Top](/wiki/spaces/ITF/pages/18022739/ITF+XML+Reference)
