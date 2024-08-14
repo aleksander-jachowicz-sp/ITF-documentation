@@ -2,8 +2,8 @@
 
 * * *
 
-<a id="4.14.0"></a>
-## [4.14.0](#4.14.0) - 2025-08-14
+
+## <a id="4.14.0"></a> [4.14.0](#4.14.0) - 2025-08-14
 
 ###### Added
 1. Date format for [pseudo attribute today](/Pseudo%20date%20handling) value for [MockedAggregate](/ITF%20XML%20Reference/#mockedaggregate) command. 
@@ -11,8 +11,8 @@
 ###### Changed
 1. Release notes format changed.
 
-<a id="4.13.3"></a>
-## [4.13.3](#4.13.3) - 2025-08-05
+
+## <a id="4.13.3"></a> [4.13.3](#4.13.3) - 2025-08-05
 
 ###### Added
 1. throwIfExists option for ExpectedLink of [ValidateResult](/ITF%20XML%20Reference/#validateresult) command.
