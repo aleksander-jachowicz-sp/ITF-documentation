@@ -375,7 +375,10 @@ The `<ApprovalLevel>` list of lists structure stays the same. The difference is 
             <FieldValue>Timbuktu</FieldValue>
           </Field>
           <Field fieldName="multiAttribute1">
-            <FieldValue>value1,value2</FieldValue>
+              <FieldValues>
+                  <Value>cn=employees,ou=groups,dc=example,dc=org</Value>
+                  <Value>cn=BusinessAnalystGroup,ou=groups,dc=amp,dc=com</Value>
+              </FieldValues>
           </Field>
           <Field fieldName="CalculatedField" validateOnly="true">
             <FieldValue>London added postfix</FieldValue>
@@ -391,7 +394,17 @@ There are no more `<ApprovalItems>` because the represent ApprovalSet, and there
 
 There is one decision for the whole approval which represents pressing next or back button.
 
-`<FieldValue>` element content is the value that will be used to fill out the field in the form(when `validateOnly` is false(the default)). When `validateOnly` is true value will be compared to field value after the form submission. This is designed to validate content of automatically generated fields. For multi valued fields use csv(coma separated values) format. When entered "null" literal expected value will be set to null. When it's left empty value will be and empty string. For checkbox use true, false values.
+`<FieldValue>` element content is the value that will be used to fill out the field in the form(when `validateOnly` is 
+false(the default)). When `validateOnly` is true value will be compared to field value after the form submission. 
+This is designed to validate content of automatically generated fields. 
+
+For multivalued fields use `<FieldValues>` putting each value in `Value` tag. If the type of filed is Identity user ids as value(s). 
+In case of ManagedAttribute type use the `value` of the ManagedAttribute 
+(This is strange as there is no application not attribute name mentioned but this seems to be the way IIQ works).   
+
+When entered "null" literal expected value will be set to null. When it's left empty value will be and empty string. 
+
+For checkbox use true, false values.
 
 `validateOnly` - Boolean attribute of `<Field>` . When set to true ITF will not use this value to fill out the field but rather validate if the field contains this value after form submission. This is intended to be used to validate correctness of calculated fields. When set to false (default value), standard above described behavior is used.
 
