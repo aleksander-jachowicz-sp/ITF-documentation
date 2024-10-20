@@ -2,8 +2,15 @@
 
 * * *
 
+## <a id="4.16.0"></a> [4.16.0](#4.16.0) - 2024-08-14
+###### Added
+1. New approval type ViolationReview support for Approval command.
+2. Completer for approvalSet based workItems.
 
-## <a id="4.14.0"></a> [4.14.0](#4.14.0) - 2025-08-14
+###### Fixed
+1. Approval now registers owner of the approval as the completer.
+
+## <a id="4.14.0"></a> [4.14.0](#4.14.0) - 2024-08-14
 
 ###### Added
 1. Date format for [pseudo attribute today](/Pseudo%20date%20handling) value for [MockedAggregate](/ITF%20XML%20Reference/#mockedaggregate) command. 
@@ -12,7 +19,7 @@
 1. Release notes format changed.
 
 
-## <a id="4.13.3"></a> [4.13.3](#4.13.3) - 2025-08-05
+## <a id="4.13.3"></a> [4.13.3](#4.13.3) - 2024-08-05
 
 ###### Added
 1. throwIfExists option for ExpectedLink of [ValidateResult](/ITF%20XML%20Reference/#validateresult) command.

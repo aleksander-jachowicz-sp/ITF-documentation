@@ -256,6 +256,7 @@ This example shows expected approval based on approvalSet. `<Approver>` is the e
                 </ApprovalItem>
             </ApprovalItems>
             <Approver>spadmin</Approver>
+            <Completer>spadmin</Completer>
             <Target>Harry.Dixon</Target>
         </Approval>
     </ApprovalLevel>
@@ -284,6 +285,12 @@ attribute `item` and nested `<Item>` element in the same `ApprovalItem`.
 
 For approvals with approvalSet, the workItem will not be approved until there is a decision specified for each item.
 In the first example above, Michael Miller approved role Designer and denies role Business Analyst.
+
+`<Completer>` - optional element that represents the user that will complete the workItem. 
+If not provided, the owner of the workItem will be the completer. Completer must be either workItem owner or a member of 
+WorkItem owner's workgroup. This will be used only for WorkItems that contain ApprovalSet.
+
+`<Target>` - optional element that represents the target of the workItem. This is the identity that is being affected by the workItem.
 
 Finally, to summarize the above information, the final approval command for the example scenario looks similar to this:
 
@@ -355,6 +362,39 @@ to be sure that the approval is not there. In the example above, we are checking
 So when using `failOnExists` attribute, you can omit any(within a reason) attributes of `<Approval>` and `<ApprovalItem>` elements.
 
 Obviously the `decision` attribute is not applicable in this case and if provided it's ignored.
+
+###### ViolationReview approvals
+
+For handling policy violations in the approval process, you can use `ViolationReview` type of approval. 
+This is a special type of approval that is generated when a policy violation is triggered during the LCM request.
+You still need to provide ApprovalItems and Approver as in the standard Approval. 
+But for this type of approval, you also need to provide a PolicyViolation element decision and comment.
+
+```xml
+<Approval failOnExists="false" matchDescriptionWithRegex="false" type="ViolationReview">
+    <ApprovalItems>
+        <ApprovalItem applicationName="IdentityIQ" attributeName="assignedRoles" item="Accounts Receivable" operation="Add"/>
+    </ApprovalItems>
+    <Approver>spadmin</Approver>
+    <PolicyViolation validateUnlistedPolicies="true">
+        <PolicyName>Accounts payable receivable</PolicyName>
+    </PolicyViolation>
+    <Decision>approve</Decision>
+    <PolicyViolationComment>It's ok. Everybody else is sick.</PolicyViolationComment>
+</Approval>
+```
+
+`PolicyViolation` - element that contains one or more `PolicyName` elements. These are the expected policy violations generated when IIQ created the workItem.
+
+`validateUnlistedPolicies` - Boolean attribute(default false). 
+When false ITF will only check if listed `PolicyName`'s policies were present on the approval. 
+When set to true framework will also check if there are any policy violations on the approval which are not listed in 
+the `PolicyViolation` element and if there are exceptions will be thrown.
+
+`Decision` - element represents which button on the form is clicked. Value `approve` is equivalent to pressing `Submit wiht Violations`
+button and `deny` is equivalent to pressing `Cancel Request` button.
+
+`PolicyViolationComment` - when approval type is `ViolationReview` and decision is `approve` you have to provide comment.
 
 ##### Form approvals
 
