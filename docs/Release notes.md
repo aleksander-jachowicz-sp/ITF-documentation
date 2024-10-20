@@ -2,7 +2,7 @@
 
 * * *
 
-## <a id="4.16.0"></a> [4.16.0](#4.16.0) - 2024-08-14
+## <a id="4.16.0"></a> [4.16.0](#4.16.0) - 2024-10-20
 ###### Added
 1. New approval type ViolationReview support for Approval command.
 2. Completer for approvalSet based workItems.
