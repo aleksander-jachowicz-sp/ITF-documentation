@@ -30,29 +30,29 @@
 1. Bugfix: accepting null ResourceObject on MockedAggregation command.
 2. BugFix: running schema customization rules on MockedAggregation command.
 
-## 4.13.2
+## 4.13.2 - 2024-06-23
 
 1. Link disable validation with pseudo attribute IIQDisabled.
 2. Multithreaded ITF execution bugfix.
 
-## 4.13.1
+## 4.13.1 - 2024-05-20
 
 1. ITF task results now end with guid.
 
-## 4.13
+## 4.13 - 2024-05-08
 
 1. New command: [InvokeTestCase](/ITF%20XML%20Reference/#invoketestcase)
 
-## 4.12
+## 4.12 - 2024-04-19
 
 1. New improved CheckEmail command and EmailNotifierControl command to manage email notifications logging.
 
-## 4.11
+## 4.11 - 2024-03-31
 
 1. Matching workItems for approval by Description.
 2. Throwing explicit exception when more than one approval matches the approval command.
 
-## 4.10.2
+## 4.10.2 - 2024-03-18
 
 1. ITF configuration checker in Intellij plugin
 2. Bugfix: Proper ITF client authentication to IIQ server
@@ -61,7 +61,7 @@
 
 1. bugfix: Back button in custom form approval now works properly.
 
-## 4.10
+## 4.10 - 2024-02-03
 
 1. Single approval command
 2. SetTestIdentity command
@@ -70,7 +70,7 @@
 5. Validating account attributes directly in target system.
 4. Bugfixes
 
-## 4.9
+## 4.9 2023-10-30
 
 1. CancelAccessRequest command
 2. failOnExists for approvals
