@@ -87,7 +87,7 @@ java -Dlog4j.configurationFile=file:itf\resources\log4j2.properties -cp lib\*;.\
 
 ITF client has a default timeout of 300 seconds before it fails when waiting for the test case to finish.
 If you need to change this value, you can use `-DclientTimeout` system property. 
-You can also change the client timeout per test case by adding `clientTimeout` attribute to the `TestCase` element in the test case XML file (details [here](/ITF%20XML%20Reference/#itf-test-case)).
+You can also change the client timeout per test case by adding `clientTimeout` attribute to the `TestCase` element in the test case XML file (details [here](../ITF%20XML%20Reference/#itf-test-case)).
 
 ## Import and export IdentityIQ objects, retrieve commands
 

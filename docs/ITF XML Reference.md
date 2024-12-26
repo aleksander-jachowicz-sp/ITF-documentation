@@ -34,7 +34,7 @@ the 1st and 2nd line represents the header that should be present in each test c
 `deleteObjects` - optional attribute. When set to true, all objects loaded by ITF during the test case will be deleted from IIQ instance. This is very useful to keep your IdentityIQ instance clean from any test data.
 
 `clientTimeout` - optional attribute. This is the time in seconds that ITF will wait for the test case to finish. The default value is 300 seconds. 
-This value will overwrite JVM level [properties setting](/IIQ%20connectivity/#client-timeout-configuration). 
+This value will overwrite JVM level [properties setting](../IIQ%20connectivity/#client-timeout-configuration). 
 
 `<TestCaseName>` - name of your test case.
 
