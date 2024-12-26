@@ -83,6 +83,11 @@ If you want to include log4j configuration file to print out progress, you can u
 ```
 java -Dlog4j.configurationFile=file:itf\resources\log4j2.properties -cp lib\*;.\itf\itfDependencies\* com.itf.test.CmdLineITFRunner "Setup Rita.Wheeler identity for test" http://localhost:8080/identityiq8.3 spadmin admin
 ```
+#### Client timeout configuration
+
+ITF client has a default timeout of 300 seconds before it fails when waiting for the test case to finish.
+If you need to change this value, you can use `-DclientTimeout` system property. 
+You can also change the client timeout per test case by adding `clientTimeout` attribute to the `TestCase` element in the test case XML file (details [here](/ITF%20XML%20Reference/#itftestcase<TestCase>)).
 
 ## Import and export IdentityIQ objects, retrieve commands
 

@@ -4,6 +4,7 @@
 ## <a id="4.16.0"></a> [4.17.0](#4.17.0) - 2024-12-25
 ###### Added
 1. isTransient setting on [runWorkflow command](/ITF%20XML%20Reference/#runwfl).
+2. ITF client timeout setting. [Test case level](/ITF%20XML%20Reference/#itftestcase<TestCase>) [JVM level](/IIQ%20connectivity/#clienttimeoutconfiguration). 
 
 ###### Fixed
 1. Transient form validation.
