@@ -1,6 +1,12 @@
 # Release notes
 
 * * *
+## <a id="4.16.0"></a> [4.17.0](#4.17.0) - 2024-12-25
+###### Added
+1. isTransient setting on [runWorkflow command](/ITF%20XML%20Reference/#runwfl).
+
+###### Fixed
+1. Transient form validation.
 
 ## <a id="4.16.0"></a> [4.16.0](#4.16.0) - 2024-10-20
 ###### Added

@@ -11,7 +11,7 @@ The content of ITF test case is represented by XML file.
 <?xml version='1.0' encoding='UTF-8'?>
 <!DOCTYPE TestCase PUBLIC "-//amidentity//DTD TestCase 2.0//EN" 
             "http://www.amidentity.com/dtd/AutomatedTestingXMLSchema20.dtd">
-<TestCase removeIds="true" deleteObjects="false">
+<TestCase removeIds="true" deleteObjects="false" clientTimeout="400" >
 	<TestCaseName>My first test case</TestCaseName>
 	<Description>This is optional test case description</Description>
 	<TestIdentity>John.Doe</TestIdentity>
@@ -894,7 +894,8 @@ Run workflow command gives you the ability to run any workflow with a predefined
         compilePlan="false" 
         startAsynchronously="false" 
         updateRoleIdsInAccountRequests="true"
-        logDisplayName="Running test workflow">
+        logDisplayName="Running test workflow"
+        isTransient="true">
   <Attributes>
     <entry key="identityName" value="Betty.Young"/>
 	<entry key="launcher" value="spadmin"/>
@@ -924,6 +925,8 @@ Run workflow command gives you the ability to run any workflow with a predefined
 `startAsynchronously` - When set to true workflow request (with current timestamp for start time) will be created instead of starting the workflow using `Workflower.launch()` method. Default value is false.
 
 `updateRoleIdsInAccountRequests` - Boolean, default false. When you create identity request for role in IIQ, system creates a provisioning plan in which there is single `AccountRequest` for each role you order. In each of these `AccountRequests` there is an attribute named id that contains the id of requested role. For obvious reasons you can’t include that id in your test case yourself because it is different in each environment. Setting `RunWfl` command attribute `updateRoleIdsInAccountRequests` to true will make ITF set above described attribute id with correct role id in the `AccountRequest`. It works the same for entitlement request.
+
+`isTransient` - Boolean, default false. When true, workflow will be launched as transient. IMPORTANT !!! You still have to mark the workflow as transient in the workflow this only tells ITF to launch workflow in session.
 
 `<Attributes>` - list of attributes that will be set as input variables for the workflow.
 
