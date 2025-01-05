@@ -1,7 +1,13 @@
 # Release notes
 
 * * *
-## <a id="4.16.0"></a> [4.17.0](#4.17.0) - 2024-12-25
+
+## <a id="4.17.1"></a> [4.17.1](#4.17.1) - 2025-01-05
+
+###### Fixed
+1. Transient for validation whn for is referenced in workflow(as opposed to being embedded)
+
+## <a id="4.17.0"></a> [4.17.0](#4.17.0) - 2024-12-25
 ###### Added
 1. isTransient setting on [runWorkflow command](../ITF%20XML%20Reference/#runwfl).
 2. ITF client timeout setting. Test case level: [here](../ITF%20XML%20Reference/#itf-test-case) JVM setting: [here](../IIQ%20connectivity/#client-timeout-configuration). 
