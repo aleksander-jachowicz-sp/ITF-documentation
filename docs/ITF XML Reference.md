@@ -407,6 +407,14 @@ fill out the form with specified values, validate selected fields and submit the
 
 The `<ApprovalLevel>` list of lists structure stays the same. The difference is replacement of `<ApprovalItems>` with a`<Form>`.
 
+Validating approvals is a 2-step process. First ITF needs to find the form matching `<Approval>`. Matching is based on:
+- Owner of the workItem
+- Description of the workItem
+- Form fields names(only)
+
+When the form is found, in second phase, ITF will fill out the form with the values provided in the `<Form>` and submit it.
+
+
 ```xml
 <CheckApprovals>
   <ApprovalLevel>
@@ -1026,6 +1034,17 @@ Modify it as you need and return it.
 <div class="my_info">
 Ensure that you turn off simulation at the end of your test case unless you need the simulation mode to stay configured in your IdentityIQ instance.
 </div>
+
+### Sleep
+
+Command to pause the test execution for a specified number of seconds.
+
+```xml
+<Sleep seconds="5"/>
+```
+**Properties:**
+
+`seconds` - number of seconds to pause the test execution.
 
 ### TimeMachine
 
