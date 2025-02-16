@@ -5,6 +5,7 @@
 ### <a id="4.17.2"></a> [4.17.2](#4.17.2) - 2025-02-16
 ###### Added
 1. New command [Sleep command](../ITF%20XML%20Reference/#sleep).
+2. New ITF Client logging with System.out. 
 
 ###### Fixed
 1. Proper handling of referenced forms in workflow (including transient and multiple ones).
