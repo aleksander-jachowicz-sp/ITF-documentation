@@ -14,17 +14,20 @@ The Plugin provides you with the ability to:
 3. Refresh IIQ Objects
 4. Compare IIQ Objects with a remote version
 
-### Environments usage
+### Connectivity configuration
 
-All IIQ object operations can communicate with all your environments defined in `target.properties` files. 
-Plugin will allow you to select any of the defined environments to interact with as long as you define the following 
-properties inside each `target.properties` files:
+The plugin can interact with all environments defined in target.properties files. 
+You can interact with any of these environments, provided the following properties are specified in each 
+`*.target.properties` file:
 
 | **Property name**  | **Description**          | Sample value                       |
 |:-------------------|--------------------------|------------------------------------|
 | `%%ECLIPSE_URL%%`  | Url of IdentityIQ server | `http://localhost:8080/identityiq` |
 | `%%ECLIPSE_USER%%` | Name of the user         | spadmin                            |
 | `%%ECLIPSE_PASS%%` | Plain text password      | admin                              |
+
+Pay speciall attention to the `%%ECLIPSE_URL%%` property. Make sure that port number is correct, protocol 
+(http/https) is correct.
 
 <div class="my_note">
     Since password is stored in plain text and possibly being committed to git repository, do not use this for important environments, where access is restricted. 

@@ -13,6 +13,8 @@ nav:
         - Configuring ITF DTD for IntelliJ: 'Configuring ITF DTD for IntelliJ.md'
         - Configuring ITF libraries for Eclipse: 'Configuring ITF libraries for Eclipse.md'
         - Configuring ITF DTD for Eclipse: 'Configuring ITF DTD for Eclipse.md'
+        - Configuring ITF Server side logging: 'Configuring ITF Server side logging.md'
+        - Configuring ITF Client side logging: 'Configuring ITF Client side logging.md'
     - Reference:
         - Command reference: 'ITF XML Reference.md'
         - Pseudo date handling: 'Pseudo date handling.md'
@@ -20,6 +22,7 @@ nav:
         - Running Test Cases in IIQ: 'Running test cases from IIQ.md'
         - Test identity generator: 'Test identity generator.md'
         - Learn by example: 'Learn by example.md'
+        - FAQ: 'FAQ.md'
     - IntelliJ plugin:
         - Plugin capabilities: 'IntelliJFunc.md'
     - Release notes: 'Release notes.md'

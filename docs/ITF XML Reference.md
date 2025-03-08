@@ -670,6 +670,9 @@ Command instantiates the connector and executes the plan directly without using 
 The result of provisioning will not be applied to identity in IIQ.
 The main purpose of this command is clean data before or after the test case in target systems.
 
+Connector command will instantiate the connector not connector proxy class which mean any before and after provisioning 
+rules defined on the application will not be executed.
+
 ```xml
 <Connector failOnException="true" throwOnFailedResult="true" logDisplayName="Remove OpenLDAP group">
     <Plan identityName="Angela.Bell">
@@ -1479,7 +1482,7 @@ This command will search for the latest access request made by the test identity
 Schema representing provisioning plan. XML elements naming is the same as original XML `ProvisioningPlan` representation in IdentityIQ.
 
 ```xml
-<Plan identityName="Brenda.Cooper">
+<Plan identityName="Brenda.Cooper" createIdentity="false">
 	<Attributes>
 		<entry key="sample attribute" value="house"/>
 	</Attributes>
@@ -1525,6 +1528,9 @@ Schema representing provisioning plan. XML elements naming is the same as origin
 	</Requesters>
 </Plan>
 ```
+
+`createIdentity` - optional attribute. When set to true, ITF will create a blank identity in memory with identity name set to `identityName` attribute. 
+This is to be used in a create identity scenario. When IIQ invokes the identity create workflow a provisioning plan contain such identity. Default value is false.
 
 #### logDisplayName
 

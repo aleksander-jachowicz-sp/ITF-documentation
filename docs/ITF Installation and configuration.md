@@ -21,5 +21,6 @@ Once you unzip the distribution file, you will find the following directories:
 Disclaimer: The following documentation provides step-by-step instruction on how to configure ITF in SSB based build. If you are using different build, some steps may be different. In such case, please contact us for assistance.
 
 * [Deploy ITF IdentityIQ plugin.md](Deploy%20ITF%20IdentityIQ%20plugin.md)
-* [Configuring ITF in the SSB build](/wiki/spaces/ITF/pages/266436611/Configuring+ITF+in+the+SSB+build)
-* [Install IntelliJ ITF plugin](/wiki/spaces/ITF/pages/266076182/Install+IntelliJ+ITF+plugin)
+* [Configuring ITF in the SSB build](Configuring%20ITF%20in%20the%20SSB%20build.md)
+* [Install IntelliJ ITF plugin](Install%20IntelliJ%20ITF%20plugin.md)
+* [Configuring ITF Sever side logging](Configuring%20ITF%20Server%20side%20logging.md)
