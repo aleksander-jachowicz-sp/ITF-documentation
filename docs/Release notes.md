@@ -1,6 +1,11 @@
 # Release notes
 
 * * *
+### <a id="4.19.0"></a> [4.19.0](#4.19.0) - 2025-03-15
+###### Fixed
+1. Clean workflow command checks for workflow existance while iterating.
+###### Added
+1. Attributes for run workflow command. [More info...](ITF%20XML%20Reference.md/#runtask)
 
 ### <a id="4.18.0"></a> [4.18.0](#4.18.0) - 2025-03-08
 ###### Fixed

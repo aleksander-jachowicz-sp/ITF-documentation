@@ -898,6 +898,27 @@ This command lets you run beanshell script you specify in the command.
 `<Source>` mandatory XML element inside which you should put the code of the script you wan to run. To avoid problems with XML it is recommended that you put all you source co between `<![CDATA[` and `]]>`.
 
 ### RunTask
+Command to run any IdentityIQ task. By default, it will run the task synchronously, waiting for it to finish before returning control back to ITF.
+ITF will wait for the task to finish with time out value of waitTimeout seconds. Default timeout is 120 seconds.
+Keep in mind that if this command finished with the timeout, the started task will keep on running on IIQ.
+
+```xml
+<RunTask taskName="Acme task tester" asynchronous="true" waitTimeout="30">
+    <Attributes>
+        <entry key="input" value="demo"/>
+    </Attributes>
+</RunTask>
+```
+**Attributes:**
+
+`taskName` (mandatory): The name of the task to run.
+
+`asynchronous` (optional): Boolean. When set to true, the task will be run asynchronously. The default value is false.
+
+`waitTimeout` (optional): Number of seconds to wait for the task to finish before throwing an exception. The default value is 120 seconds.
+
+`<Attributes>` (optional): A list of attributes to be passed to the task. Each attribute is represented as an entry element with key and value attributes.
+
 
 ### RunWfl
 
