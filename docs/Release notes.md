@@ -1,6 +1,22 @@
 # Release notes
 
 * * *
+### <a id="5.0.0"></a> [5.0.0](#5.0.0) - 2025-05-20
+###### Fixed
+1. Reading workItems from IIQ server now works properly.
+2. Attributes value can now be nested.
+###### Added
+1. Skip option for all commands
+2. New command CheckIdentityNotExists
+3. New "ldap" format for pseudo value "today"
+4. Simulation results can now be modified on the fly.
+5. "null" value for validation.
+6. ObjectRequest for provisioning plan testing.
+7. Tokenization now possible for all test case files.
+8. New SqlScript command.
+9. "today" pseudo value can now be used in task attributes.
+
+
 ### <a id="4.19.0"></a> [4.19.0](#4.19.0) - 2025-03-15
 ###### Fixed
 1. Clean workflow command checks for workflow existance while iterating.
