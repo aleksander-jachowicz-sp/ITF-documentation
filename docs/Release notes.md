@@ -1,6 +1,11 @@
 # Release notes
 
 * * *
+### <a id="5.1.1"></a> [5.1.1](#5.1.1) - 2025-09-03
+###### Added
+1. Identity type fields in Forms handling. 
+
+* * *
 ### <a id="5.1.0"></a> [5.1.0](#5.1.0) - 2025-08-24
 ###### Fixed
 1. Result validation fixed.

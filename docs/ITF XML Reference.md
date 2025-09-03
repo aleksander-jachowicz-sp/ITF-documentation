@@ -457,6 +457,8 @@ When entered "null" literal expected value will be set to null. When it's left e
 
 For checkbox use true, false values.
 
+If the form field is of sailpoint.object.Identity type provide identity name as value. ITF will resolve it and provide the id of the identity to the form.
+
 `validateOnly` - Boolean attribute of `<Field>` . When set to true ITF will not use this value to fill out the field but rather validate if the field contains this value after form submission. This is intended to be used to validate correctness of calculated fields. When set to false (default value), standard above described behavior is used.
 
 `<Decision>` element represents which button on the form is clicked. Possible values are approve and deny. Value approve is equivalent to pressing next button and deny, the back button. There is no option for cancel button.
