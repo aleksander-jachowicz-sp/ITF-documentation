@@ -1,6 +1,17 @@
 # Release notes
 
 * * *
+### <a id="5.1.0"></a> [5.1.0](#5.1.0) - 2025-08-24
+###### Fixed
+1. Result validation fixed.
+###### Added
+1. Partial mocked aggregate command.
+2. Quicklink command.
+3. SetAttribute command.
+4. WaitForTaskResult command.
+5. CreateFile command.
+
+
 ### <a id="5.0.0"></a> [5.0.0](#5.0.0) - 2025-05-20
 ###### Fixed
 1. Reading workItems from IIQ server now works properly.

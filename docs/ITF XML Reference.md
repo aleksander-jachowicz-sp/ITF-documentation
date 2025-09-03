@@ -691,7 +691,20 @@ rules defined on the application will not be executed.
 
 `Plan` - [provisioning plan](#plan) to execute. Mandatory. This plan must target external application (this can't be IIQ plan).
 This plan must contain only one accountRequest.
- 
+
+### CreateFile 
+Creates (or overwrites) a text file during test execution by writing content from the content file.
+Useful when you need to create a file to be used by some connector(file-based aggregation) or custom rule during the test case.
+
+```xml
+<CreateFile fileName="C:\tmp\created_by_itf2.txt" contentFileName="content.txt"/>
+```
+
+`fileName` - full path of the file to create. Mandatory.
+
+`contentFileName` - name of the file (in the same directory as the test case) that contains the content 
+to write in the created file. Mandatory.
+
 ### EmailNotifierControl
 
 Command to manage ITF email notifier. Email notifier is responsible for logging all the emails being sent by IIQ and storing them
@@ -788,10 +801,10 @@ This command sets the log level in memory. It will not survive server restart. I
 
 ### MockedAggregate
 
-Command to aggregate an account from json or xml file as resource object instead of invoking real application connector.
+Command to aggregate an account from JSON or XML file as a resource object instead of invoking a real application connector.
 
 ```xml
-<MockedAggregate logDisplayName="Fake aggregation" objectType="account">
+<MockedAggregate logDisplayName="Fake aggregation" objectType="account" partial="false">
 	<ApplicationName>HR_Employees</ApplicationName>
 	<FileName>Gloria.Reynolds_hr</FileName>
 	<Attributes>
@@ -800,11 +813,30 @@ Command to aggregate an account from json or xml file as resource object instead
 </MockedAggregate>
 ```
 
-`<MockedAggregate`\> attributes:
+`<MockedAggregate\>` attributes:
 
-`objectType` - (optional) - Type of the object being aggregated. Default value if not provided is 'account'. This value must match 'objectType' value from application schema.
+`objectType` - (optional) - Type of the object being aggregated. The default value if not provided is 'account'. This value must match the 'objectType' value from the application schema.
 
-**Tags:**
+`partial` - (optional) - Boolean. Allows a mocked aggregation to be expressed as a change set instead of a full account snapshot.
+#### Behavior
+* partial="false" or omitted: The provided attributes are treated as the complete state of the external account. 
+Attributes not listed are considered intentionally absent (and may be removed or ignored by downstream logic).
+* partial="true": Unspecified attributes from the currently known account (same application + native identity) are preserved. 
+Only supplied attributes are treated as changed. This prevents accidental loss of unrelated data and reduces test verbosity.
+* If no prior account exists, partial="true" behaves the same as false.
+#### Effects (when true):
+* You can send only the attributes you want to add or modify.
+* Existing values for omitted attributes are retained.
+* Supplied attributes always take precedence.
+#### Use when:
+* Simulating incremental updates.
+* Focusing a test on a small attribute change.
+* Avoiding unintended side effects from omitting unrelated attributes.
+#### Avoid when:
+* Intentionally testing removal/absence of attributes.
+* Validating behavior on a full authoritative snapshot.
+
+***Tags:***
 
 `<ApplicationName>`\- Application to aggregate from.
 
@@ -861,6 +893,8 @@ Command to execute provisioning plan. Provided plan will be compiled and execute
   </Plan>
 </Provision>
 ```
+
+###   
 
 ### RunRule
 
