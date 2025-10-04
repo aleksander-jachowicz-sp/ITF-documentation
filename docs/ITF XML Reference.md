@@ -1001,7 +1001,46 @@ Run workflow command gives you the ability to run any workflow with a predefined
 
 `<Attributes>` - list of attributes that will be set as input variables for the workflow.
 
-`<Plan>` - Provisioning plan is a special parameter that deserves special treatment. You specify the plan on a dedicated attribute. XML schema will guide you with plan configuring. It is very similar to IIQ’s provisioning plan xml representation.
+`<Plan>` - Provisioning plan is a special parameter that deserves special treatment. You specify the plan on a dedicated attribute. XML schema will guide you with plan configuring. It is very similar to IIQ's provisioning plan xml representation.
+
+### SetAttribute
+
+Command to set custom attributes in the test execution context. These attributes can be accessed later in the test case using scripts or rules. This is useful for storing and passing data between different commands during test execution.
+
+The attribute value can be set in three ways: directly via static value, dynamically via a rule, or dynamically via a script.
+
+Static value version:
+```xml
+<SetAttribute name="myTestAttribute" value="testValue"/>
+```
+
+Using rule:
+```xml
+<SetAttribute name="myTestAttribute" ruleName="CalculateAttributeValue"/>
+```
+
+Using script:
+```xml
+<SetAttribute name="myTestAttribute">
+    <Script><![CDATA[
+        import sailpoint.object.Identity;
+        Identity identity = context.getObjectByName(Identity.class, "spadmin");
+        return identity.getFirstname() + " " + identity.getLastname();
+    ]]></Script>
+</SetAttribute>
+```
+
+**Attributes:**
+
+`name` - Mandatory. Name of the attribute to set in the test execution context.
+
+`value` - Optional. Static value to set for the attribute. You can use `today+/-n` [pseudo value](/Pseudo%20date%20handling) in this attribute. Either `value`, `ruleName`, or `<Script>` must be provided.
+
+`ruleName` - Optional. Name of the rule to execute. The rule's return value will be set as the attribute value. Either `value`, `ruleName`, or `<Script>` must be provided.
+
+**Tags:**
+
+`<Script>` - Optional. BeanShell script to execute. The script's return value will be set as the attribute value. Either `value`, `ruleName`, or `<Script>` must be provided. Wrap script content in `<![CDATA[` and `]]>` to avoid XML parsing issues.
 
 ### SetTestIdentity
 

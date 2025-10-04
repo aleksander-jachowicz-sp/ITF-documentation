@@ -7,22 +7,22 @@ The next step is to configure your IdentityIQ SSB build to use ITF.
 
 ## Copying library files
 
-The source for all copy instructions is unzipped ITF distribution file.
+The source for all copy instructions is an unzipped ITF distribution file.
 
-1. Copy all jar files from `lib` directory to your SSB lib directory. If you already have JUnit configured in your build you can skip the JUnit jar.
+1. Copy all jar files from `lib` directory to your SSB lib directory. If you already have JUnit configured in your build, you can skip the JUnit jar.
 2. Copy `ift` folder to the root directory of your SSB build.
-3. Copy jar from `simulator` folder to web/WEB-INF/lib directory of SSB. Do this only if you wan to user simulator or check email commands.
+3. Copy jar from `simulator` folder to web/WEB-INF/lib directory of SSB. Do this only if you want to simulate provisioning or check email commands.
 
-| **NOTE**              |
-|:----------------------|
-| Before the simulator and email command will work you have to <br/>rebuild and redeploy you SSB and restart your server (Tomcat)|
+| **NOTE**                                                                                                                        |
+|:--------------------------------------------------------------------------------------------------------------------------------|
+| Before the simulator and email command will work you have to <br/>rebuild and redeploy you SSB and restart your server (Tomcat) |
 
 ## IIQ Server Settings
 
-IFT needs to know the location and credentials to you IIQ servers to run test cases, download upload objects, download formatted commands etc. There are 2 places where it reads the connection data:
+ITf needs to know the location and credentials to your IIQ servers to run test cases, download upload objects, download formatted commands etc. There are 2 places where it reads the connection data:
 
-* To run test cases, ITF reads connection data from `itf.properties` file. Either from environment specific file (using SSB environment mechanism) or generic properties file in `ift/resources` directory.
-* For all other operations (uploading, downloading, refreshing objects, generating test case commands) ITF uses mechanism known from DA (Deployment accelerator). IIQ connection data is read from environment target properties files from variables `%%ECLIPSE_URL%%`, `%%ECLIPSE_USER%%`, `%%ECLIPSE_PASS%%`.
+* To run test cases, ITF reads connection data from `itf.properties` file. Either from environment-specific file (using SSB environment mechanism) or generic properties file in `ift/resources` directory.
+* For all other operations (uploading, downloading, refreshing objects, generating test case commands) ITF uses a mechanism known from DA (Deployment accelerator). IIQ connection data is read from environment target properties files from variables `%%ECLIPSE_URL%%`, `%%ECLIPSE_USER%%`, `%%ECLIPSE_PASS%%`.
 
 **Test case running target configuration steps:**
 

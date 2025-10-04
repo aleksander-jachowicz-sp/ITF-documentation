@@ -1,6 +1,22 @@
 # Release notes
 
 * * *
+### <a id="5.2.0"></a> [5.2.0](#5.2.0) - 2025-10-04
+
+###### IntelliJ Plugin - Major Update (Version 2.0.0)
+1. **New:** Modern IIQ server configuration system with centralized management
+2. **Enhanced:** Settings dialog with table-based server management and connection testing
+3. **Improved:** Execution target designation
+4. **Backward Compatible:** Existing target.properties-based configurations continue to work
+
+###### Fixed
+1. Handling forms with no fields in approval workflows
+
+###### Changed
+1. [SetAttribute command](ITF%20XML%20Reference.md#setattribute) - value attribute is now optional
+2. Server configuration moved to a centralized management system
+
+* * *
 ### <a id="5.1.1"></a> [5.1.1](#5.1.1) - 2025-09-03
 ###### Added
 1. Identity type fields in Forms handling. 
