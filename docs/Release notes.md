@@ -1,6 +1,12 @@
 # Release notes
 
 * * *
+### <a id="5.2.0"></a> [5.2.1](#5.2.1) - 2025-10-04
+
+###### Fixed
+1. No more itf.properties in the new Intellij configuration and automatic logging setting.
+
+* * *
 ### <a id="5.2.0"></a> [5.2.0](#5.2.0) - 2025-10-04
 
 ###### IntelliJ Plugin - Major Update (Version 2.0.0)
