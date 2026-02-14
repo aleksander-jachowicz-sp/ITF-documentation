@@ -1,6 +1,23 @@
 # Release notes
 
 * * *
+### <a id="5.2.3"></a> [5.2.3](#5.2.3) - 2026-02-14
+
+###### Fixed
+1. WorkItem description validation fixed.
+2. Identity dropdown form fields values handling fixed.
+3. Object loading for the test case only loads correct objects at start  
+4. Saving a test case to IIQ, cleans objects to load first.
+5. ResourceObject for MockedAggregation command can be used multiple times in the same test case.
+6. Uploading test cases to IIQ properly handles InvokeTestCase commands (Requires Intellij plugin upgrade)
+
+###### Changed
+1. IdentityName not required for Plan on identity creation
+
+###### Added
+1. validationType attribute of <Item> in approvals.
+
+* * *
 ### <a id="5.2.0"></a> [5.2.1](#5.2.1) - 2025-10-04
 
 ###### Fixed

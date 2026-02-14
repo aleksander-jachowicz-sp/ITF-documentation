@@ -7,14 +7,17 @@ nav:
     - Installation:
         - Installation and configuration: 'ITF Installation and configuration.md'
         - IIQ ITF Plugin installation: 'Deploy ITF IdentityIQ plugin.md'
-        - Install IntelliJ ITF plugin: 'Install IntelliJ ITF plugin.md'
-        - Configuring ITF in the SSB build: 'Configuring ITF in the SSB build.md'
-        - Configuring ITF libraries for IntelliJ: 'Configuring ITF libraries for IntelliJ.md'
-        - Configuring ITF DTD for IntelliJ: 'Configuring ITF DTD for IntelliJ.md'
-        - Configuring ITF libraries for Eclipse: 'Configuring ITF libraries for Eclipse.md'
-        - Configuring ITF DTD for Eclipse: 'Configuring ITF DTD for Eclipse.md'
-        - Configuring ITF Server side logging: 'Configuring ITF Server side logging.md'
-        - Configuring ITF Client side logging: 'Configuring ITF Client side logging.md'
+        - ITF Configuration:
+            - Configuring ITF in the SSB build: 'Configuring ITF in the SSB build.md'
+            - Configuring ITF libraries for IntelliJ: 'Configuring ITF libraries for IntelliJ.md'
+            - Configuring ITF DTD for IntelliJ: 'Configuring ITF DTD for IntelliJ.md'
+            - Configuring ITF libraries for Eclipse: 'Configuring ITF libraries for Eclipse.md'
+            - Configuring ITF DTD for Eclipse: 'Configuring ITF DTD for Eclipse.md'
+            - Configuring ITF Server side logging: 'Configuring ITF Server side logging.md'
+            - Configuring ITF Client side logging: 'Configuring ITF Client side logging.md'
+        - IntelliJ IDEA Plugin:
+            - IntelliJ IDEA Plugin Installation: 'Install IntelliJ ITF plugin.md'
+            - IntelliJ IDEA Plugin Configuration and Usage: 'Configure_IIQ_Servers.md'
     - Reference:
         - Command reference: 'ITF XML Reference.md'
         - Pseudo date handling: 'Pseudo date handling.md'

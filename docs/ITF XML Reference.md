@@ -40,10 +40,10 @@ This value will overwrite JVM level [properties setting](../IIQ%20connectivity/#
 
 `<Description>` - optional test case description.
 
-`<TestIdentity>` - node to provide the file name (without extension) of the identity that is being used for the test. 
+`<TestIdentity>` - Depreciated (Use LoadObjects and SetIdentity commands instead) - node to provide the file name (without extension) of the identity that is being used for the test. 
 The identity name should match the file name (but it's not mandatory).
 
-`<ObjectsToLoad>` - list of the objects to be loaded before test case processing. The order of loading is the same as order in the test case. test identity is loaded after all object from `<ObjectsToLoad>` are imported.
+`<ObjectsToLoad>` - Depreciated (Use LoadObjects command instead) - List of the objects to be loaded before test case processing. The order of loading is the same as order in the test case. test identity is loaded after all object from `<ObjectsToLoad>` are imported.
 
 `<TestCommands>` - place all you test commands in here ;-)
 
@@ -221,6 +221,7 @@ Currently supported workItem types are `Approval` and `ManualAction`.
 <CheckApprovals>
   <ApprovalLevel>
     <Approval>
+      <Description>My Custom Form description</Description>
       <ApprovalItems>
         <ApprovalItem applicationName="IdentityIQ"
                       attributeName="assignedRoles"
@@ -243,13 +244,14 @@ This example shows expected approval based on approvalSet. `<Approver>` is the e
 ```xml
 <CheckApprovals logDisplayName="Manual workitem">
     <ApprovalLevel>
-        <Approval type="ManualAction">
+        <Approval type="ManualAction" matchDescriptionWithRegex="false">
+            <Description>My Custom Form description</Description>
             <ApprovalItems>
                 <ApprovalItem applicationName="Simulate LDAP" 
                               nativeIdentity="cn=Harry Dixon,ou=users,dc=sim,dc=com" 
                               operation="Create" 
                               decision="approve">
-                    <Item>
+                    <Item validationType="strict">
                         <String>cn = 'Harry Dixon'</String>
                         <String>givenName = 'Harry'</String>
                         <String>sn = 'Dixon'</String>
@@ -271,6 +273,14 @@ List of Strings and is represented as nested `<Item>` element.
 `<Approval>` - represents single workItem that you expect to find and approve or deny. It can be of type `Approval` or `ManualAction`.
 the default type is `Approval`.
 
+Attributes:
+
+`matchDescriptionWithRegex` - Boolean. If true, matches Description using regex; if false (default), using equals matching.
+
+Nested elements:
+
+`Description` - Description of a WorkItem to be validated.
+
 `<ApprovalItem>` - represents single approval item expected in ApprovalSet.
 
 `applicationName` - name of the application for which the approval item belongs. In case of roles they are part of IdentityIQ, and that literal should be used.
@@ -282,7 +292,9 @@ the default type is `Approval`.
 `item` - value of the approval item being approved. This is an equivalent of the `value` attribute in `ApprovalItem`.
 In most cases this will be the name of the role or entitlement being approved. This can be an attribute of `ApprovalItem`
 or a nested element `<Item>`. In the latter case, the value of the item is a list of strings. You can't have both
-attribute `item` and nested `<Item>` element in the same `ApprovalItem`.
+attribute `item` and nested `<Item>` element in the same `ApprovalItem`. `<Item>`s attribute `validationType`: Defines how the Item 
+list is checked again the real value. When set to 'strict' Item list must match exactly the real list. 
+When set to 'contains' it is only enough that all provided values exist in a real Item. Default value is 'strict'
 
 `decision` - the approval decision you want the test case to perform. This can be `approve` or `deny`.
 
@@ -844,7 +856,7 @@ Only supplied attributes are treated as changed. This prevents accidental loss o
 
 `<FileName>` - Name of the file (with or without extension) that contains aggregation data. Aggregation file contains data in json or xml format. Attribute names must match values from application schema. Make sure that one of the attributes is identity attribute (also matching the one configured in application schema).
 
-`<Attributes>` - list of aggregation attributes.
+`<Attributes>` - List of aggregation attributes. You can use stored attribute set by [SetAttribute](#setattribute) as value.
 
 Some aggregation attributes are set to the following defaults promoteAttributes: true, correlateEntitlements: false, noOptimizeReaggregation: true. You can change them by adding attributes property. Attributes you can use are:
 
@@ -895,8 +907,6 @@ Command to execute provisioning plan. Provided plan will be compiled and execute
   </Plan>
 </Provision>
 ```
-
-###   
 
 ### RunRule
 
@@ -1005,7 +1015,14 @@ Run workflow command gives you the ability to run any workflow with a predefined
 
 ### SetAttribute
 
-Command to set custom attributes in the test execution context. These attributes can be accessed later in the test case using scripts or rules. This is useful for storing and passing data between different commands during test execution.
+Command to set custom attributes in the test execution context. These attributes can be used later in the test case in various commands.
+To use saved attribute in another command, use the following syntax ${attribute name}. 
+This is useful for storing and passing data between different commands during test execution.
+
+Contact us if you want to use such attribute in a command that is not listed below.
+
+Commands that can use stored attribute values:
+ -  [MockedAggregate command attributes](#MockedAggregate)
 
 The attribute value can be set in three ways: directly via static value, dynamically via a rule, or dynamically via a script.
 
@@ -1578,7 +1595,7 @@ This command will search for the latest access request made by the test identity
 Schema representing provisioning plan. XML elements naming is the same as original XML `ProvisioningPlan` representation in IdentityIQ.
 
 ```xml
-<Plan identityName="Brenda.Cooper" createIdentity="false">
+<Plan identityName="Brenda.Cooper">
 	<Attributes>
 		<entry key="sample attribute" value="house"/>
 	</Attributes>
@@ -1624,9 +1641,6 @@ Schema representing provisioning plan. XML elements naming is the same as origin
 	</Requesters>
 </Plan>
 ```
-
-`createIdentity` - optional attribute. When set to true, ITF will create a blank identity in memory with identity name set to `identityName` attribute. 
-This is to be used in a create identity scenario. When IIQ invokes the identity create workflow a provisioning plan contain such identity. Default value is false.
 
 #### logDisplayName
 
