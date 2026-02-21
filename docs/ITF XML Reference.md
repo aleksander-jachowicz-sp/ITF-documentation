@@ -1019,10 +1019,20 @@ Command to set custom attributes in the test execution context. These attributes
 To use saved attribute in another command, use the following syntax ${attribute name}. 
 This is useful for storing and passing data between different commands during test execution.
 
-Contact us if you want to use such attribute in a command that is not listed below.
+Contact us if you want to use such an attribute in a place that is not listed below.
 
 Commands that can use stored attribute values:
- -  [MockedAggregate command attributes](#MockedAggregate)
+ - [MockedAggregate command attributes](#MockedAggregate)
+ - In Form/Field attribute fieldName and nested FieldValue in [Approval command](#Form-approvals) 
+ - Approver and Target in [Approval command](#CheckApprovals) 
+ - identityName attribute in [Plan](#Plan) 
+ - Plan/AccountRequest/nativeIdentity in [Plan](#Plan) 
+ - Plan/ObjectRequest/nativeIdentity in [Plan](#Plan)
+ - value in ExpectedIdentity/Attributes/entry in [ValidateResult command](#validateresult)
+ - Attribute value in RunWfl/Attributes/entry in [RunWfl command](#runwfl)
+ - Attribute value in ValidateResult/ExpectedIdentity/Attributes/entry in [ValidateResult command](#validateresult)
+ - Attribute value in RunRule/Attributes/entry in [RunRule command](#runrule)
+ - Attribute value in RunTask/Attributes/entry in [RunTask command](#runtask)
 
 The attribute value can be set in three ways: directly via static value, dynamically via a rule, or dynamically via a script.
 
