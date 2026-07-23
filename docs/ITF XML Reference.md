@@ -457,9 +457,9 @@ There are no more `<ApprovalItems>` because the represent ApprovalSet, and there
 
 There is one decision for the whole approval which represents pressing next or back button.
 
-`<FieldValue>` element content is the value that will be used to fill out the field in the form(when `validateOnly` is 
-false(the default)). When `validateOnly` is true value will be compared to field value after the form submission. 
-This is designed to validate content of automatically generated fields. 
+`<FieldValue>` element content is the value that will be used to fill out the field in the form(when `validateOnly` is
+false(the default)). When `validateOnly` is true value will be compared to field value after the form submission.
+This is designed to validate content of automatically generated fields. Supports [attribute replacement](#attribute-replacement-pattern). 
 
 For multivalued fields use `<FieldValues>` putting each value in `Value` tag. If the type of filed is Identity user ids as value(s). 
 In case of ManagedAttribute type use the `value` of the ManagedAttribute 
@@ -473,12 +473,21 @@ If the form field is of sailpoint.object.Identity type provide identity name as 
 
 `validateOnly` - Boolean attribute of `<Field>` . When set to true ITF will not use this value to fill out the field but rather validate if the field contains this value after form submission. This is intended to be used to validate correctness of calculated fields. When set to false (default value), standard above described behavior is used.
 
-`<Decision>` element represents which button on the form is clicked. Possible values are approve and deny. Value approve is equivalent to pressing next button and deny, the back button. There is no option for cancel button.
+**Note:** The `fieldName` attribute of `<Field>` supports [attribute replacement](#attribute-replacement-pattern).
+
+`<Decision>` element represents which button on the form is clicked. You can use:
+- **Standard values**: `approve` (equivalent to pressing the Next button) or `deny` (equivalent to pressing the Back button)
+- **Custom button values**: The actual value configured on the button in your custom form (e.g., `Submit`, `Continue`, `Reject`, etc.)
+
+This allows ITF to interact with custom approval forms that use non-standard button labels. Note: There is no option for the Cancel button.
 
 `<Description>` element is used to match the description of the workItem. 
 When `matchDescriptionWithRegex` is set to true, the description is treated as a regular expression. When set to false, the description is treated as a literal. This is useful when the description is dynamic and you want to match it with a regular expression.
 
-`<Approver>` element is used to match the owner of the workItem. When the `<Approver>` element is not present, the command will match the workItem with any owner.
+`<Approver>` element is used to match the owner of the workItem. When the `<Approver>` element is not present, the command will match the workItem with any owner. Supports [attribute replacement](#attribute-replacement-pattern).
+
+`<Target>` element represents the identity that is being affected by the workItem. Supports [attribute replacement](#attribute-replacement-pattern).
+
 ITF supports custom forms that use models to propagate values between forms and workflow.
 
 **Policy violations**
@@ -856,7 +865,7 @@ Only supplied attributes are treated as changed. This prevents accidental loss o
 
 `<FileName>` - Name of the file (with or without extension) that contains aggregation data. Aggregation file contains data in json or xml format. Attribute names must match values from application schema. Make sure that one of the attributes is identity attribute (also matching the one configured in application schema).
 
-`<Attributes>` - List of aggregation attributes. You can use stored attribute set by [SetAttribute](#setattribute) as value.
+`<Attributes>` - List of aggregation attributes. Supports [attribute replacement](#attribute-replacement-pattern) in entry values.
 
 Some aggregation attributes are set to the following defaults promoteAttributes: true, correlateEntitlements: false, noOptimizeReaggregation: true. You can change them by adding attributes property. Attributes you can use are:
 
@@ -922,7 +931,7 @@ This command lets you run any beanshell rule with parameters.
 
 `ruleName` mandatory attribute specifying the name of the rule you wan to run.
 
-`Attributes` optional list of attribute you wan to pass as input argument in to the rule.
+`Attributes` optional list of attribute you wan to pass as input argument in to the rule. Supports [attribute replacement](#attribute-replacement-pattern) in entry values.
 
 ### RunScript
 
@@ -963,7 +972,7 @@ Keep in mind that if this command finished with the timeout, the started task wi
 
 `waitTimeout` (optional): Number of seconds to wait for the task to finish before throwing an exception. The default value is 120 seconds.
 
-`<Attributes>` (optional): A list of attributes to be passed to the task. Each attribute is represented as an entry element with key and value attributes.
+`<Attributes>` (optional): A list of attributes to be passed to the task. Each attribute is represented as an entry element with key and value attributes. Supports [attribute replacement](#attribute-replacement-pattern) in entry values.
 
 
 ### RunWfl
@@ -1009,31 +1018,17 @@ Run workflow command gives you the ability to run any workflow with a predefined
 
 `isTransient` - Boolean, default false. When true, workflow will be launched as transient. IMPORTANT !!! You still have to mark the workflow as transient in the workflow this only tells ITF to launch workflow in session.
 
-`<Attributes>` - list of attributes that will be set as input variables for the workflow.
+`<Attributes>` - list of attributes that will be set as input variables for the workflow. Supports [attribute replacement](#attribute-replacement-pattern) in entry values.
 
 `<Plan>` - Provisioning plan is a special parameter that deserves special treatment. You specify the plan on a dedicated attribute. XML schema will guide you with plan configuring. It is very similar to IIQ's provisioning plan xml representation.
 
 ### SetAttribute
 
 Command to set custom attributes in the test execution context. These attributes can be used later in the test case in various commands.
-To use saved attribute in another command, use the following syntax ${attribute name}. 
+To use saved attribute in another command, use the following syntax `${attribute name}`.
 This is useful for storing and passing data between different commands during test execution.
 
-Contact us if you want to use such an attribute in a place that is not listed below.
-
-Commands that can use stored attribute values:
-
-- [MockedAggregate command attributes](#MockedAggregate)
-- In Form/Field attribute fieldName and nested FieldValue in [Approval command](#Form-approvals) 
-- Approver and Target in [Approval command](#CheckApprovals) 
-- identityName attribute in [Plan](#Plan) 
-- Plan/AccountRequest/nativeIdentity in [Plan](#Plan) 
-- Plan/ObjectRequest/nativeIdentity in [Plan](#Plan)
-- value in ExpectedIdentity/Attributes/entry in [ValidateResult command](#validateresult)
-- Attribute value in RunWfl/Attributes/entry in [RunWfl command](#runwfl)
-- Attribute value in ValidateResult/ExpectedIdentity/Attributes/entry in [ValidateResult command](#validateresult)
-- Attribute value in RunRule/Attributes/entry in [RunRule command](#runrule)
-- Attribute value in RunTask/Attributes/entry in [RunTask command](#runtask)
+See [Attribute Replacement Pattern](#attribute-replacement-pattern) for detailed information on how to use stored attributes in other commands.
 
 The attribute value can be set in three ways: directly via static value, dynamically via a rule, or dynamically via a script.
 
@@ -1069,6 +1064,88 @@ Using script:
 **Tags:**
 
 `<Script>` - Optional. BeanShell script to execute. The script's return value will be set as the attribute value. Either `value`, `ruleName`, or `<Script>` must be provided. Wrap script content in `<![CDATA[` and `]]>` to avoid XML parsing issues.
+
+### Attribute Replacement Pattern
+
+ITF supports dynamic attribute replacement in many commands. This powerful feature allows you to use values stored via [SetAttribute](#setattribute) command and substitute them in various places throughout your test case.
+
+#### Replacement Syntax
+
+To reference a stored attribute, use the syntax: `${attributeName}`
+
+The attribute replacement mechanism is flexible and supports:
+
+1. **Single attribute replacement** - Replace an entire value with one stored attribute
+2. **Multiple attribute replacement** - Use multiple attributes within a single value
+3. **Pattern-based replacement** - Embed attributes within text strings
+
+#### Examples
+
+**Single attribute replacement:**
+```xml
+<SetAttribute name="userName" value="John.Doe"/>
+
+<ValidateResult>
+  <ExpectedIdentity identityName="${userName}">
+    ...
+  </ExpectedIdentity>
+</ValidateResult>
+```
+
+**Multiple attributes in one value:**
+```xml
+<SetAttribute name="firstName" value="John"/>
+<SetAttribute name="lastName" value="Doe"/>
+<SetAttribute name="location" value="London"/>
+
+<ValidateResult>
+  <ExpectedIdentity identityName="John.Doe">
+    <Attributes>
+      <entry key="fullName" value="${firstName} ${lastName}"/>
+      <entry key="description" value="User ${firstName} ${lastName} from ${location} office"/>
+    </Attributes>
+  </ExpectedIdentity>
+</ValidateResult>
+```
+
+**Complex patterns:**
+```xml
+<SetAttribute name="role" value="Administrator"/>
+<SetAttribute name="level" value="Senior"/>
+
+<RunWfl workflowName="Process Request">
+  <Attributes>
+    <entry key="requestText" value="This is value ${role} for attribute name ${level}, ok."/>
+  </Attributes>
+</RunWfl>
+```
+
+#### Supported Locations
+
+Attribute replacement can be used in the following locations:
+
+- **[MockedAggregate](#mockedaggregate)** - Attributes/entry value
+- **[CheckApprovals](#checkapprovals)** - Form/Field fieldName and nested FieldValue
+- **[CheckApprovals](#checkapprovals)** - Approver and Target elements
+- **[Plan](#plan)** - identityName attribute
+- **[Plan](#plan)** - AccountRequest/nativeIdentity attribute
+- **[Plan](#plan)** - ObjectRequest/nativeIdentity attribute
+- **[ValidateResult](#validateresult)** - IdentityName attribute
+- **[ValidateResult](#validateresult)** - ExpectedIdentity/Attributes/entry value
+- **[ValidateResult](#validateresult)** - ExpectedLink/nativeIdentity attribute
+- **[ValidateResult](#validateresult)** - ExpectedLink/Attributes/entry value
+- **[RunWfl](#runwfl)** - Attributes/entry value
+- **[RunRule](#runrule)** - Attributes/entry value
+- **[RunTask](#runtask)** - Attributes/entry value
+
+Contact us if you need to use attribute replacement in a location that is not listed above.
+
+#### Behavior
+
+- Attributes are replaced at runtime when the command is executed
+- If a referenced attribute does not exist, the replacement pattern (e.g., `${attributeName}`) will remain unchanged in the value
+- Replacement is case-sensitive - `${userName}` is different from `${username}`
+- You can use multiple occurrences of the same attribute in a single value
 
 ### SetTestIdentity
 
@@ -1284,15 +1361,15 @@ Objects for which attributes can be validated are:
 
 **ExpectedIdentity Attributes:**
 
-`identityName` - name of the validated identity.
+`identityName` - name of the validated identity. Supports [attribute replacement](#attribute-replacement-pattern).
 
-`validateUnlistedLinks` - when set to true, ITF will throw in case there are links on validated identity which are not present inside `<ExpectedLinks>` tag. Default value false.
+`validateUnlistedLinks` - when set to true, ITF will throw in case there are links on validated identity Also that are not present inside `<ExpectedLinks>` tag. Default value false.
 
-`validateUnlistedRoles`\- when set to true, ITF will throw in case there are roles on validated identity which are not present in the `<ExpectedRoles>` tag.
+`validateUnlistedRoles` - when set to true, ITF will throw in case there are roles on validated identity that are not present in the `<ExpectedRoles>` tag.
 
-`<Attributes>` - contains list of identity attribute entries to be validated. You can use `today+/-n` [pseudo value](/Pseudo%20date%20handling) as value here.
+`<Attributes>` - contains a list of identity attribute entries to be validated. You can use `today+/-n` [pseudo value](/Pseudo%20date%20handling) as value here. Supports [attribute replacement](#attribute-replacement-pattern) in entry values.
 
-`<ExpectedLinks>` - contains list of `<ExpectedLink>` tag to be validated.
+`<ExpectedLinks>` - contains a list of `<ExpectedLink>` tag to be validated.
 
 `<ExpectedLink>` - contains link data to be validated against validated identity.
 
@@ -1300,7 +1377,7 @@ Objects for which attributes can be validated are:
 
 `applicationName` - Name of the application of the link being validated. Mandatory.
 
-`nativeIdentity` - When specified ITF will check if link with such `nativeIdentity` exists on the Identity. In not present, ITF will only validate existence, in the identity, of any link from the application specified by `applicationName`.
+`nativeIdentity` - When specified ITF will check if link with such `nativeIdentity` exists on the Identity. In not present, ITF will only validate existence, in the identity, of any link from the application specified by `applicationName`. Supports [attribute replacement](#attribute-replacement-pattern).
 
 `throwIfExists` - When set to true, ITF will throw if the link with such `nativeIdentity` exists on the identity. Default value is false.
 
@@ -1310,7 +1387,7 @@ When `nativeIdentity` is not specified and there are other attributes present fo
 
 `<ExpectedManager>` - name of the manager identity to validate.
 
-`<Attributes>` - contains list of link attribute entries to be validated. You can use `today+/-n` [pseudo value](/Pseudo%20date%20handling) as value here.
+`<Attributes>` - contains list of link attribute entries to be validated. You can use `today+/-n` [pseudo value](/Pseudo%20date%20handling) as value here. Supports [attribute replacement](#attribute-replacement-pattern) in entry values.
 
 `<ExpectedRoles>` - Contains list of `<Role>` to be validated against the identity.
 
@@ -1604,6 +1681,11 @@ This command will search for the latest access request made by the test identity
 #### Plan
 
 Schema representing provisioning plan. XML elements naming is the same as original XML `ProvisioningPlan` representation in IdentityIQ.
+
+**Attribute Replacement Support:**
+- The `identityName` attribute of `<Plan>` supports [attribute replacement](#attribute-replacement-pattern)
+- The `nativeIdentity` attribute in `<AccountRequest>` supports [attribute replacement](#attribute-replacement-pattern)
+- The `nativeIdentity` attribute in `<ObjectRequest>` supports [attribute replacement](#attribute-replacement-pattern)
 
 ```xml
 <Plan identityName="Brenda.Cooper">

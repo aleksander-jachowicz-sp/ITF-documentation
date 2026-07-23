@@ -1,6 +1,33 @@
 # Release notes
 
 * * *
+### <a id="5.4.0"></a> [5.4.0](#5.4.0) - 2026-07-23
+
+###### Fixed
+1. Proper handling of all UTF-8 special characters throughout the framework.
+
+###### Enhanced
+1. **Attribute Replacement Pattern** - [SetAttribute](ITF%20XML%20Reference.md#setattribute) values can now be used in multiple locations within a single string using `${attributeName}` syntax.
+   - Multiple attributes can be combined in one value: `"User ${firstName} ${lastName} from ${location}"`
+   - Available in the following locations:
+     - [MockedAggregate](ITF%20XML%20Reference.md#mockedaggregate) - Attributes/entry values
+     - [CheckApprovals](ITF%20XML%20Reference.md#checkapprovals) - Form field names and field values
+     - [CheckApprovals](ITF%20XML%20Reference.md#checkapprovals) - Approver and Target elements
+     - [Plan](ITF%20XML%20Reference.md#plan) - identityName attribute
+     - [Plan](ITF%20XML%20Reference.md#plan) - AccountRequest/nativeIdentity and ObjectRequest/nativeIdentity
+     - [ValidateResult](ITF%20XML%20Reference.md#validateresult) - IdentityName attribute
+     - [ValidateResult](ITF%20XML%20Reference.md#validateresult) - ExpectedIdentity attribute values
+     - [ValidateResult](ITF%20XML%20Reference.md#validateresult) - ExpectedLink/nativeIdentity attribute
+     - [ValidateResult](ITF%20XML%20Reference.md#validateresult) - ExpectedLink attribute values
+     - [RunWfl](ITF%20XML%20Reference.md#runwfl) - Workflow attributes/entry values
+     - [RunRule](ITF%20XML%20Reference.md#runrule) - Rule attributes/entry values
+     - [RunTask](ITF%20XML%20Reference.md#runtask) - Task attributes/entry values
+   - See [Attribute Replacement Pattern](ITF%20XML%20Reference.md#attribute-replacement-pattern) for complete documentation
+
+###### Added
+1. **Approval Decision Enhancement** - The `<Decision>` element in [CheckApprovals](ITF%20XML%20Reference.md#checkapprovals) now supports using actual button values in addition to the standard "approve" and "deny" options, providing greater flexibility for custom approval workflows.
+
+* * *
 ### <a id="5.2.3"></a> [5.2.3](#5.2.3) - 2026-02-14
 
 ###### Fixed
