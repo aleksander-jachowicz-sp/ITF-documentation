@@ -1134,6 +1134,7 @@ Attribute replacement can be used in the following locations:
 - **[ValidateResult](#validateresult)** - ExpectedIdentity/Attributes/entry value
 - **[ValidateResult](#validateresult)** - ExpectedLink/nativeIdentity attribute
 - **[ValidateResult](#validateresult)** - ExpectedLink/Attributes/entry value
+- **[ValidateResult](#validateresult)** - RoleAssignments/RoleAssignment/RoleTarget/nativeIdentity
 - **[RunWfl](#runwfl)** - Attributes/entry value
 - **[RunRule](#runrule)** - Attributes/entry value
 - **[RunTask](#runtask)** - Attributes/entry value

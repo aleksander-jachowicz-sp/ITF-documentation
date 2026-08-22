@@ -1,6 +1,17 @@
 # Release notes
 
 * * *
+### <a id="5.4.0"></a> [5.5.0](#5.5.0) - 2026-08-22
+
+###### Fixed
+1. "today" handling in the ValidateResult link attribute.
+2. XML-related library changes in 8.5  
+
+###### Enhanced
+1. **Attribute Replacement Pattern** - [SetAttribute](ITF%20XML%20Reference.md#setattribute) usage added in RoleAssignments using `${attributeName}` syntax.
+
+
+* * *
 ### <a id="5.4.0"></a> [5.4.0](#5.4.0) - 2026-07-23
 
 ###### Fixed
